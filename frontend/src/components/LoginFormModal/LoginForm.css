@@ -1,0 +1,23 @@
+/* Log in form */
+
+.form-container {
+	padding: 1vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.name-container {
+	padding: 2vh;
+}
+
+.password-container {
+	padding: 2vh;
+}
+
+.submit-container {
+	padding: 2vh;
+}
+
+.submit-button {
+	background-color: blue;
+}
