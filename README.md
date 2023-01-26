@@ -1,4 +1,4 @@
-# Meetup
+# Rereadit
 
 ## Database Schema Design
 
