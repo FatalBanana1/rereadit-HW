@@ -50,20 +50,10 @@ module.exports = (sequelize, DataTypes) => {
 
 		static associate(models) {
 			// define association here
-			User.hasMany(models.Membership, {
-				foreignKey: "userId",
-				hooks: true,
-			});
 
 			User.hasMany(models.Group, {
 				foreignKey: "organizerId",
 				as: "Organizer",
-				hooks: true,
-			});
-
-			User.hasMany(models.Attendance, {
-				foreignKey: "userId",
-				onDelete: "CASCADE",
 				hooks: true,
 			});
 		}
