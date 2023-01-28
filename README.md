@@ -4,7 +4,7 @@
 
 ![rereadit-dbdiagram]
 
-[rereadit-dbdiagram]: ./rereadit-schema-diagram.png
+[rereadit-dbdiagram]: ./rereadit-schema.png
 
 ## API Documentation
 
