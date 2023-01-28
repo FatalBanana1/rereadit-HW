@@ -56,6 +56,16 @@ module.exports = (sequelize, DataTypes) => {
 				as: "Admin",
 				onDelete: "CASCADE",
 			});
+
+			User.hasMany(models.Post, {
+				foreignKey: "userId",
+				onDelete: "CASCADE",
+			});
+
+			User.hasMany(models.Comment, {
+				foreignKey: "userId",
+				onDelete: "CASCADE",
+			});
 		}
 	}
 	User.init(
@@ -100,6 +110,10 @@ module.exports = (sequelize, DataTypes) => {
 				validate: {
 					len: [60, 60],
 				},
+			},
+			picUrl: {
+				type: DataTypes.TEXT,
+				allowNull: true,
 			},
 		},
 		{

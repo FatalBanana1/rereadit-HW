@@ -17,11 +17,16 @@ module.exports = (sequelize, DataTypes) => {
 				as: "Subscribers",
 				onDelete: "CASCADE",
 			});
-			
+
 			Subreadit.hasMany(models.Subscription, {
 				foreignKey: "subId",
 				onDelete: "CASCADE",
 				as: "Subscriptions",
+			});
+
+			Subreadit.hasMany(models.Post, {
+				foreignKey: "subId",
+				onDelete: "CASCADE",
 			});
 		}
 	}
