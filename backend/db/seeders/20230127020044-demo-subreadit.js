@@ -37,7 +37,7 @@ module.exports = {
 		return queryInterface.bulkDelete(
 			options,
 			{
-				organizerId: {
+				adminId: {
 					[Op.gte]: 0,
 				},
 			},

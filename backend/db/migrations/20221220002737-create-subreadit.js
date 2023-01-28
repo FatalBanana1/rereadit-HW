@@ -16,32 +16,67 @@ module.exports = {
 					allowNull: false,
 					autoIncrement: true,
 					primaryKey: true,
-					type: Sequelize.INTEGER
+					type: Sequelize.INTEGER,
 				},
 				adminId: {
 					type: Sequelize.INTEGER,
 					references: {
-						model: "Users"
-					}
+						model: "Users",
+					},
 				},
 				name: {
 					type: Sequelize.STRING,
-					allowNull: false
+					allowNull: false,
 				},
 				about: {
-					type: Sequelize.STRING,
-					allowNull: false
+					type: Sequelize.STRING(500),
+					allowNull: false,
+				},
+				category: {
+					type: Sequelize.ENUM,
+					values: [
+						"Arts",
+						"Business",
+						"Community",
+						"Dancing",
+						"Education",
+						"Games",
+						"Health",
+						"Hobbies",
+						"Politics",
+						"Music",
+						"Family",
+						"Pets",
+						"Religion",
+						"Science",
+						"Social",
+						"Sports",
+						"Support",
+						"Technology",
+						"Travel",
+						"Writing",
+					],
+					defaultValue: "Hobbies",
+					allowNull: false,
+				},
+				bannerImage: {
+					type: Sequelize.TEXT,
+					allowNull: true,
+				},
+				circleImage: {
+					type: Sequelize.TEXT,
+					allowNull: true,
 				},
 				createdAt: {
 					allowNull: false,
 					type: Sequelize.DATE,
-					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 				},
 				updatedAt: {
 					allowNull: false,
 					type: Sequelize.DATE,
-					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
-				}
+					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+				},
 			},
 			options
 		);
@@ -49,5 +84,5 @@ module.exports = {
 	async down(queryInterface, Sequelize) {
 		options.tableName = "Subreadits";
 		await queryInterface.dropTable(options);
-	}
+	},
 };
