@@ -1,4 +1,4 @@
-# Rereadit
+# Rereadit - by Henry and Wasiq
 
 ## Database Schema Design
 
