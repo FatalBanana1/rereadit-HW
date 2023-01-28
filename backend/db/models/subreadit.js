@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
 	class Subreadit extends Model {
 		static associate(models) {
 			Subreadit.belongsTo(models.User, {
-				foreignKey: "organizerId",
-				as: "Organizer",
+				foreignKey: "adminId",
+				as: "Admin",
 				onDelete: "CASCADE"
 			});
 			Subreadit.belongsToMany(models.User, {
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 	}
 	Subreadit.init(
 		{
-			organizerId: {
+			adminId: {
 				type: DataTypes.INTEGER,
 				references: {
 					model: "Users"
@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
 							},
 							{
 								model: User,
-								as: "Organizer",
+								as: "Admin",
 								attributes: ["id", "username"]
 							}
 						],

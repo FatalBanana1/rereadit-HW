@@ -17,12 +17,12 @@ module.exports = {
 			options,
 			[
 				{
-					organizerId: 1,
+					adminId: 1,
 					name: "Python",
 					about: "News about the programming language Python. If you have something to teach others post here.",
 				},
 				{
-					organizerId: 1,
+					adminId: 1,
 					name: "JavaScript",
 					about: "All about the JavaScript programming language!",
 				},

@@ -18,7 +18,7 @@ module.exports = {
 					primaryKey: true,
 					type: Sequelize.INTEGER
 				},
-				organizerId: {
+				adminId: {
 					type: Sequelize.INTEGER,
 					references: {
 						model: "Users"
