@@ -51,10 +51,10 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 
-			User.hasMany(models.Group, {
+			User.hasMany(models.Subreadit, {
 				foreignKey: "adminId",
 				as: "Admin",
-				hooks: true,
+				onDelete: "CASCADE",
 			});
 		}
 	}

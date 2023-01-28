@@ -3,11 +3,13 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Subreadit extends Model {
 		static associate(models) {
+
 			Subreadit.belongsTo(models.User, {
 				foreignKey: "adminId",
 				as: "Admin",
 				onDelete: "CASCADE",
 			});
+
 			Subreadit.belongsToMany(models.User, {
 				through: models.Subscription,
 				foreignKey: "subId",
@@ -15,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 				as: "Subscribers",
 				onDelete: "CASCADE",
 			});
+			
 			Subreadit.hasMany(models.Subscription, {
 				foreignKey: "subId",
 				onDelete: "CASCADE",
