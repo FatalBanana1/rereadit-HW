@@ -29,7 +29,7 @@ module.exports = {
 					allowNull: false,
 				},
 				about: {
-					type: Sequelize.STRING(500),
+					type: Sequelize.STRING,
 					allowNull: false,
 				},
 				category: {
