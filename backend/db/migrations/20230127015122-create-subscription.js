@@ -14,38 +14,40 @@ module.exports = {
 					allowNull: false,
 					autoIncrement: true,
 					primaryKey: true,
-					type: Sequelize.INTEGER
+					type: Sequelize.INTEGER,
 				},
 				subId: {
 					type: Sequelize.INTEGER,
 					references: {
-						model: "Subreadits"
+						model: "Subreadits",
 					},
 					onDelete: "CASCADE",
-					allowNull: false
+					allowNull: false,
 				},
 				userId: {
 					type: Sequelize.INTEGER,
 					references: {
-						model: "Users"
+						model: "Users",
 					},
 					onDelete: "CASCADE",
-					allowNull: false
+					allowNull: false,
 				},
-				mod: {
-					type: Sequelize.BOOLEAN,
-					defaultValue: false
+				status: {
+					type: Sequelize.ENUM,
+					values: ["Mod", "Member", "Banned"],
+					defaultValue: "Member",
+					allowNull: false,
 				},
 				createdAt: {
 					allowNull: false,
 					type: Sequelize.DATE,
-					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 				},
 				updatedAt: {
 					allowNull: false,
 					type: Sequelize.DATE,
-					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
-				}
+					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+				},
 			},
 			options
 		);
@@ -53,5 +55,5 @@ module.exports = {
 	async down(queryInterface, Sequelize) {
 		options.tableName = "Subscriptions";
 		await queryInterface.dropTable(options);
-	}
+	},
 };

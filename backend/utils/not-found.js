@@ -1,20 +1,20 @@
-const { Subrereadit } = require("../db/models");
+const { Subreadit } = require("../db/models");
 
-const checkIfSubrereaditExists = async (req, res, next) => {
+const checkIfSubreaditExists = async (req, res, next) => {
 	const { subId } = req.params;
-	const subrereadit = await Subrereadit.scope({
+	const subreadit = await Subreadit.scope({
 		method: ["singleSub"]
 	}).findByPk(+subId);
 
-	if (!subrereadit) {
-		const err = new Error("Subrereadit could not be found");
+	if (!subreadit) {
+		const err = new Error("Subreadit could not be found");
 		err.status = 404;
 		return next(err);
 	}
-	req.subrereadit = subrereadit;
+	req.subreadit = subreadit;
 	return next();
 };
 
 module.exports = {
-	checkIfSubrereaditExists
+	checkIfSubreaditExists
 };

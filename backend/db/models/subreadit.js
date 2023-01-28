@@ -111,7 +111,7 @@ module.exports = (sequelize, DataTypes) => {
 								attributes: ["id", "username"],
 							},
 						],
-						group: ["Subreadit.id", "Organizer.id"],
+						group: ["Subreadit.id", "Admin.id"],
 					};
 				},
 			},

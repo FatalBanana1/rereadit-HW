@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			Subscription.belongsTo(models.Subreadit, {
 				foreignKey: "subId",
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
 			});
 			Subscription.belongsTo(models.User, {
 				foreignKey: "userId",
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
 			});
 		}
 	}
@@ -18,25 +18,27 @@ module.exports = (sequelize, DataTypes) => {
 			subId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Subreadits"
+					model: "Subreadits",
 				},
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
 			},
 			userId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Users"
+					model: "Users",
 				},
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
 			},
-			mod: {
-				type: DataTypes.BOOLEAN,
-				defaultValue: false
-			}
+			status: {
+				type: DataTypes.ENUM,
+				values: ["Mod", "Member", "Banned"],
+				defaultValue: "Member",
+				allowNull: false,
+			},
 		},
 		{
 			sequelize,
-			modelName: "Subscription"
+			modelName: "Subscription",
 		}
 	);
 	return Subscription;

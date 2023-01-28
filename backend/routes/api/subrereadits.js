@@ -1,15 +1,15 @@
-// routes > api > subrereadits
+// routes > api > subreadits
 
 //imports
 const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
-const { checkIfSubrereaditExists } = require("../../utils/not-found");
-const { User, Subrereadit, Subscription } = require("../../db/models");
+const { checkIfSubreaditExists } = require("../../utils/not-found");
+const { User, Subreadit, Subscription } = require("../../db/models");
 const router = express.Router();
 
-router.get("/:subId", checkIfSubrereaditExists, (req, res, next) => {
-	res.json(req.subrereadit);
+router.get("/:subId", checkIfSubreaditExists, (req, res, next) => {
+	res.json(req.subreadit);
 });
 
 module.exports = router;
