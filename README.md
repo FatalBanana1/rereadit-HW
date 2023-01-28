@@ -2,9 +2,9 @@
 
 ## Database Schema Design
 
-![meetup-dbdiagram]
+![rereadit-dbdiagram]
 
-[meetup-dbdiagram]: ./meetup-wr-diagram.png
+[rereadit-dbdiagram]: ./rereadit-schema-diagram.png
 
 ## API Documentation
 
