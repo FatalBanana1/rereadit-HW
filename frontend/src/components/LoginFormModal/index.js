@@ -52,6 +52,15 @@ function LoginFormModal() {
 			.then(() => history.push("/"));
 	};
 
+	const demoSignin4 = (e) => {
+		e.preventDefault();
+		let credential = "wizkid";
+		let password = "password4";
+		return dispatch(sessionActions.login({ credential, password }))
+			.then(closeModal)
+			.then(() => history.push("/"));
+	};
+
 	return (
 		<>
 			<h1>Log In</h1>
@@ -92,6 +101,10 @@ function LoginFormModal() {
 
 			<div className="users">
 				<button onClick={demoSignin3}>Demo User (Bond)</button>
+			</div>
+
+			<div className="users">
+				<button onClick={demoSignin3}>Demo User (Wizard)</button>
 			</div>
 		</>
 	);

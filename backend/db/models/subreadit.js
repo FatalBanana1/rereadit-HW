@@ -1,28 +1,28 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-	class Subrereadit extends Model {
+	class Subreadit extends Model {
 		static associate(models) {
-			Subrereadit.belongsTo(models.User, {
+			Subreadit.belongsTo(models.User, {
 				foreignKey: "organizerId",
 				as: "Organizer",
 				onDelete: "CASCADE"
 			});
-			Subrereadit.belongsToMany(models.User, {
+			Subreadit.belongsToMany(models.User, {
 				through: models.Subscription,
 				foreignKey: "subId",
 				otherKey: "userId",
 				as: "Subscribers",
 				onDelete: "CASCADE"
 			});
-			Subrereadit.hasMany(models.Subscription, {
+			Subreadit.hasMany(models.Subscription, {
 				foreignKey: "subId",
 				onDelete: "CASCADE",
 				as: "Subscriptions"
 			});
 		}
 	}
-	Subrereadit.init(
+	Subreadit.init(
 		{
 			organizerId: {
 				type: DataTypes.INTEGER,
@@ -47,10 +47,10 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{
 			sequelize,
-			modelName: "Subrereadit",
+			modelName: "Subreadit",
 			scopes: {
 				singleSub() {
-					const { Subscription, User } = require("../models");
+					const { Subscription, User } = require(".");
 					return {
 						attributes: {
 							include: [
@@ -73,11 +73,11 @@ module.exports = (sequelize, DataTypes) => {
 								attributes: ["id", "username"]
 							}
 						],
-						group: ["Subrereadit.id", "Organizer.id"]
+						group: ["Subreadit.id", "Organizer.id"]
 					};
 				}
 			}
 		}
 	);
-	return Subrereadit;
+	return Subreadit;
 };

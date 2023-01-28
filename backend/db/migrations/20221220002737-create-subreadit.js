@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === "production") {
 module.exports = {
 	async up(queryInterface, Sequelize) {
 		await queryInterface.createTable(
-			"Subrereadits",
+			"Subreadits",
 			{
 				id: {
 					allowNull: false,
@@ -47,7 +47,7 @@ module.exports = {
 		);
 	},
 	async down(queryInterface, Sequelize) {
-		options.tableName = "Subrereadits";
+		options.tableName = "Subreadits";
 		await queryInterface.dropTable(options);
 	}
 };

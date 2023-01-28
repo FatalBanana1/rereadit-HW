@@ -19,53 +19,53 @@ module.exports = {
 				{
 					subId: 1,
 					userId: 1,
-					mod: true
+					mod: true,
 				},
 				{
 					subId: 1,
 					userId: 2,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 1,
 					userId: 3,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 1,
 					userId: 4,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 1,
 					userId: 5,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 2,
 					userId: 2,
-					mod: true
+					mod: true,
 				},
 				{
 					subId: 2,
 					userId: 1,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 2,
 					userId: 3,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 2,
 					userId: 4,
-					mod: false
+					mod: false,
 				},
 				{
 					subId: 2,
 					userId: 5,
-					mod: false
-				}
+					mod: false,
+				},
 			],
 			{}
 		);
@@ -78,10 +78,10 @@ module.exports = {
 			options,
 			{
 				subId: {
-					[Op.in]: [1, 2, 3, 4, 5]
-				}
+					[Op.gte]: 0,
+				},
 			},
 			{}
 		);
-	}
+	},
 };

@@ -19,7 +19,7 @@ module.exports = {
 				subId: {
 					type: Sequelize.INTEGER,
 					references: {
-						model: "Subrereadits"
+						model: "Subreadits"
 					},
 					onDelete: "CASCADE",
 					allowNull: false

@@ -12,37 +12,36 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		options.tableName = "Subrereadits";
+		options.tableName = "Subreadits";
 		return queryInterface.bulkInsert(
 			options,
 			[
 				{
 					organizerId: 1,
 					name: "Python",
-					about:
-						"News about the programming language Python. If you have something to teach others post here."
+					about: "News about the programming language Python. If you have something to teach others post here.",
 				},
 				{
 					organizerId: 1,
 					name: "JavaScript",
-					about: "All about the JavaScript programming language!"
-				}
+					about: "All about the JavaScript programming language!",
+				},
 			],
 			{}
 		);
 	},
 
 	down: async (queryInterface, Sequelize) => {
-		options.tableName = "Subrereadits";
+		options.tableName = "Subreadits";
 		const Op = Sequelize.Op;
 		return queryInterface.bulkDelete(
 			options,
 			{
 				organizerId: {
-					[Op.in]: [1, 2, 3, 4, 5]
-				}
+					[Op.gte]: 0,
+				},
 			},
 			{}
 		);
-	}
+	},
 };

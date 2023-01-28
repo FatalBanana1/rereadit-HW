@@ -3,7 +3,7 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Subscription extends Model {
 		static associate(models) {
-			Subscription.belongsTo(models.Subrereadit, {
+			Subscription.belongsTo(models.Subreadit, {
 				foreignKey: "subId",
 				onDelete: "CASCADE"
 			});
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 			subId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Subrereadits"
+					model: "Subreadits"
 				},
 				onDelete: "CASCADE"
 			},
