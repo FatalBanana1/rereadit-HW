@@ -24,7 +24,7 @@ module.exports = {
 				},
 				lastName: {
 					type: Sequelize.STRING(30),
-					allowNull: false,
+					allowNull: true,
 				},
 				username: {
 					type: Sequelize.STRING(30),

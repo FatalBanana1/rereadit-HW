@@ -1,0 +1,67 @@
+#page-top{
+    border: 1px solid blue;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#page-top-banner{
+    height: 80px;
+    width: 100%;
+    border: 1px solid red;
+}
+#page-top-strip{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border: 10px solid pink;
+}
+
+#page-top-title{
+    display: flex;
+    border: 5px solid purple;
+    width: 55vw;
+}
+
+#content-container{
+    display: flex;
+    width: 55vw;
+    border: 4px solid orange;
+}
+
+#left-content-container{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+    width: 60%;
+}
+
+#create-post-container{
+    height: 40px;
+    border: 4px solid greenyellow;
+    width: 100%
+}
+
+#post-card-container{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+#post-card{
+    height: 150px;
+    width: 100%;
+    border: 2px solid lightgreen;
+}
+
+#right-content-container{
+    border: 3px solid red;
+    width: 40%;
+    display: flex;
+}
+
+#about-card{
+    height: 400px;
+    width: 100%;
+    border: 2px solid blue;
+}

@@ -17,43 +17,71 @@ module.exports = {
 			options,
 			[
 				{
-					email: "demo@user.io",
-					username: "Demo-lition",
+					email: "sparrow@user.io",
+					username: "captain",
 					hashedPassword: bcrypt.hashSync("password"),
-					firstName: "Dom",
-					lastName: "Santiago",
+					firstName: "Jack",
+					lastName: "Sparrow",
 				},
 
 				{
-					email: "billyb1@gmail.com",
-					username: "baggins",
+					email: "solo@aol.com",
+					username: "solo",
 					hashedPassword: bcrypt.hashSync("password2"),
-					firstName: "Bilbo",
-					lastName: "Baggins",
+					firstName: "Han",
+					lastName: "Solo",
 				},
 
 				{
-					email: "rocks@yahoo.com",
-					username: "stardazed",
+					email: "bond@secret.com",
+					username: "bond007",
 					hashedPassword: bcrypt.hashSync("password3"),
-					firstName: "Patrick",
-					lastName: "Star",
+					firstName: "James",
+					lastName: "Bond",
 				},
 
 				{
-					email: "british@gmail.com",
-					username: "thebaby",
+					email: "potter@gmail.com",
+					username: "wizkid",
 					hashedPassword: bcrypt.hashSync("password4"),
-					firstName: "Stewie",
-					lastName: "Griffin",
+					firstName: "Harry",
+					lastName: "Potter",
 				},
 
 				{
-					firstName: "Al",
-					lastName: "Gore",
 					email: "globalwarming@aol.com",
 					username: "goremania",
-					hashedPassword: bcrypt.hashSync("password5"),
+					firstName: "Al",
+					lastName: "Gore",
+					hashedPassword: bcrypt.hashSync("password6"),
+				},
+				{
+					email: "twelve@gmail.com",
+					username: "thirteen",
+					firstName: "Eleven",
+					lastName: "",
+					hashedPassword: bcrypt.hashSync("password7"),
+				},
+				{
+					email: "cosmos@yahoo.com",
+					username: "cosmitology",
+					firstName: "Cosmo",
+					lastName: "Kramer",
+					hashedPassword: bcrypt.hashSync("password8"),
+				},
+				{
+					email: "thedoor@gmail.com",
+					username: "holdit",
+					firstName: "Jon",
+					lastName: "Snow",
+					hashedPassword: bcrypt.hashSync("password9"),
+				},
+				{
+					email: "donuts@aol.com",
+					username: "gonuts",
+					firstName: "Homer",
+					lastName: "Simpson",
+					hashedPassword: bcrypt.hashSync("password10"),
 				},
 			],
 			{}
@@ -66,14 +94,8 @@ module.exports = {
 		return queryInterface.bulkDelete(
 			options,
 			{
-				username: {
-					[Op.in]: [
-						"Demo-lition",
-						"baggins",
-						"stardazed",
-						"thebaby",
-						"goremania",
-					],
+				id: {
+					[Op.gte]: 0,
 				},
 			},
 			{}
