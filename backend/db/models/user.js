@@ -21,40 +21,47 @@ module.exports = (sequelize, DataTypes) => {
 				where: {
 					[Op.or]: {
 						username: credential,
-						email: credential,
-					},
-				},
+						email: credential
+					}
+				}
 			});
 			if (user && user.validatePassword(password)) {
 				return await User.scope("currentUser").findByPk(user.id);
 			}
 		}
 
-		static async signup({
-			firstName,
-			lastName,
-			username,
-			email,
-			password,
-		}) {
+		static async signup({ firstName, lastName, username, email, password }) {
 			const hashedPassword = bcrypt.hashSync(password);
 			const user = await User.create({
 				firstName,
 				lastName,
 				username,
 				email,
-				hashedPassword,
+				hashedPassword
 			});
 			return await User.scope("currentUser").findByPk(user.id);
 		}
 
 		static associate(models) {
-			// define association here
-
+			// User -|--< Subreadits Admin Association
 			User.hasMany(models.Subreadit, {
 				foreignKey: "adminId",
 				as: "Admin",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
+			});
+			// User -|--< Subscriptions >--|- Subreadits
+			// Subscriber Association
+			User.belongsToMany(models.Subreadit, {
+				through: models.Subscription,
+				foreignKey: "userId",
+				otherKey: "subId",
+				as: "Subscribers",
+				onDelete: "CASCADE"
+			});
+			// User -|--< Subscriptions Association
+			User.hasMany(models.Subscription, {
+				foreignKey: "userId",
+				onDelete: "CASCADE"
 			});
 		}
 	}
@@ -64,15 +71,15 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					len: [2, 30],
-				},
+					len: [2, 30]
+				}
 			},
 			lastName: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					len: [2, 30],
-				},
+					len: [2, 30]
+				}
 			},
 			username: {
 				type: DataTypes.STRING,
@@ -83,44 +90,44 @@ module.exports = (sequelize, DataTypes) => {
 						if (Validator.isEmail(value)) {
 							throw new Error("Cannot be an email.");
 						}
-					},
-				},
+					}
+				}
 			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					len: [3, 256],
-					isEmail: true,
-				},
+					isEmail: true
+				}
 			},
 			hashedPassword: {
 				type: DataTypes.STRING.BINARY,
 				allowNull: false,
 				validate: {
-					len: [60, 60],
-				},
-			},
+					len: [60, 60]
+				}
+			}
 		},
 		{
 			sequelize,
 			modelName: "User",
 			defaultScope: {
 				attributes: {
-					exclude: ["hashedPassword", "updatedAt", "createdAt"],
-				},
+					exclude: ["hashedPassword", "updatedAt", "createdAt"]
+				}
 			},
 			scopes: {
 				currentUser: {
 					attributes: {
-						exclude: ["hashedPassword"],
-					},
+						exclude: ["hashedPassword"]
+					}
 				},
 
 				loginUser: {
-					attributes: {},
-				},
-			},
+					attributes: {}
+				}
+			}
 		}
 	);
 	return User;

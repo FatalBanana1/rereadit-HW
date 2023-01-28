@@ -3,11 +3,10 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Subreadit extends Model {
 		static associate(models) {
-
 			Subreadit.belongsTo(models.User, {
 				foreignKey: "adminId",
 				as: "Admin",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
 
 			Subreadit.belongsToMany(models.User, {
@@ -15,13 +14,18 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "subId",
 				otherKey: "userId",
 				as: "Subscribers",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
-			
+			//
 			Subreadit.hasMany(models.Subscription, {
 				foreignKey: "subId",
 				onDelete: "CASCADE",
-				as: "Subscriptions",
+				as: "Subscriptions"
+			});
+			// Subreadit -|--< Posts association
+			Subreadit.hasMany(models.Post, {
+				foreignKey: "subId",
+				onDelete: "CASCADE"
 			});
 		}
 	}
@@ -30,22 +34,22 @@ module.exports = (sequelize, DataTypes) => {
 			adminId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Users",
-				},
+					model: "Users"
+				}
 			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					len: [2, 60],
-				},
+					len: [2, 60]
+				}
 			},
 			about: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					min: 50,
-				},
+					min: 50
+				}
 			},
 			category: {
 				type: DataTypes.ENUM,
@@ -69,19 +73,19 @@ module.exports = (sequelize, DataTypes) => {
 					"Support",
 					"Technology",
 					"Travel",
-					"Writing",
+					"Writing"
 				],
 				defaultValue: "Hobbies",
-				allowNull: false,
+				allowNull: false
 			},
 			bannerImage: {
 				type: DataTypes.TEXT,
-				allowNull: true,
+				allowNull: true
 			},
 			circleImage: {
 				type: DataTypes.TEXT,
-				allowNull: true,
-			},
+				allowNull: true
+			}
 		},
 		{
 			sequelize,
@@ -93,31 +97,28 @@ module.exports = (sequelize, DataTypes) => {
 						attributes: {
 							include: [
 								[
-									sequelize.fn(
-										"COUNT",
-										sequelize.col("Subscriptions.id")
-									),
-									"SubscriberCount",
-								],
-							],
+									sequelize.fn("COUNT", sequelize.col("Subscriptions.id")),
+									"SubscriberCount"
+								]
+							]
 						},
 						include: [
 							{
 								model: Subscription,
 								attributes: [],
 								as: "Subscriptions",
-								required: false,
+								required: false
 							},
 							{
 								model: User,
 								as: "Admin",
-								attributes: ["id", "username"],
-							},
+								attributes: ["id", "username"]
+							}
 						],
-						group: ["Subreadit.id", "Admin.id"],
+						group: ["Subreadit.id", "Admin.id"]
 					};
-				},
-			},
+				}
+			}
 		}
 	);
 	return Subreadit;

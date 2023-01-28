@@ -1,17 +1,24 @@
 NOTES--WH
-
-
+Discuss what data we need for get all/vs get single routes
+Discuss on delete cascade, specifically with comments/child comments
+Discuss subreadit/subscription/user associations
 ---------------------------------------
 Henry
 
 TODO:
-
+1. Models/Migrations for posts
+2. Models/Migrations for comments
+3. Post model associations
+4. Comment model associations
+5. Seed Data
+6. Feature 1 routes:
+    Subreadit scopes
 
 
 
 ---------------------------------------
 Other:
-
+npx sequelize model:generate --name Comment --attributes postId:integer,userId:integer,parentId:integer,text:text
 
 
 ---------------------------------------
