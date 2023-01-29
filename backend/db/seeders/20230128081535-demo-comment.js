@@ -51,7 +51,7 @@ module.exports = {
 		return queryInterface.bulkDelete(
 			options,
 			{
-				subId: {
+				postId: {
 					[Op.gte]: 0
 				}
 			},

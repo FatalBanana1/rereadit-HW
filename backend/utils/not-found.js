@@ -7,9 +7,11 @@ const checkIfSubreaditExists = async (req, res, next) => {
 	}).findByPk(+subId);
 
 	if (!subreadit) {
-		const err = new Error("Subreadit could not be found");
-		err.status = 404;
-		return next(err);
+		return res.status(404).json({
+			title: "Not Found",
+			message: "Subreadit could not be found",
+			status: 404
+		});
 	}
 	req.subreadit = subreadit;
 	return next();
