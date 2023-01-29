@@ -49,13 +49,21 @@ module.exports = (sequelize, DataTypes) => {
 				as: "Admin",
 				onDelete: "CASCADE"
 			});
-			// User -|--< Subscriptions >--|- Subreadits
-			// Subscriber Association
+			// User -|--< Subscriptions >--|- Subreadits Associations
+			// Subscribers
 			User.belongsToMany(models.Subreadit, {
 				through: models.Subscription,
 				foreignKey: "userId",
 				otherKey: "subId",
 				as: "Subscribers",
+				onDelete: "CASCADE"
+			});
+			// Mods
+			User.belongsToMany(models.Subreadit, {
+				through: models.Subscription,
+				foreignKey: "userId",
+				otherKey: "subId",
+				as: "Mods",
 				onDelete: "CASCADE"
 			});
 			// User -|--< Subscriptions Association

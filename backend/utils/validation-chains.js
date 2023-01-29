@@ -28,7 +28,27 @@ const validateLogin = [
 		.withMessage("Password is required"),
 	handleValidationErrors
 ];
+
+// Subreadit POSTS/PUTS
+const validateSubreadit = [
+	check("name")
+		.isString()
+		.withMessage("Name must be a string")
+		.exists({ checkFalsy: true })
+		.withMessage("Name is required")
+		.isLength({ min: 2, max: 60 })
+		.withMessage("Name must be 2-60 characters"),
+	check("about")
+		.isString()
+		.withMessage("About must be a string")
+		.exists({ checkFalsy: true })
+		.withMessage("About is required")
+		.isLength({ min: 50 })
+		.withMessage("About must be at least 50 characters")
+];
+
 module.exports = {
 	validateSignup,
-	validateLogin
+	validateLogin,
+	validateSubreadit
 };

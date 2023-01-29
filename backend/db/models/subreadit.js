@@ -3,12 +3,14 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Subreadit extends Model {
 		static associate(models) {
+			// User -|--< Subreadits Amin Association
 			Subreadit.belongsTo(models.User, {
 				foreignKey: "adminId",
 				as: "Admin",
 				onDelete: "CASCADE"
 			});
-
+			// Subreadits -|--< Subscriptions >--|- Users Associations
+			// Subscribers
 			Subreadit.belongsToMany(models.User, {
 				through: models.Subscription,
 				foreignKey: "subId",
@@ -16,7 +18,15 @@ module.exports = (sequelize, DataTypes) => {
 				as: "Subscribers",
 				onDelete: "CASCADE"
 			});
-			//
+			// Mods
+			Subreadit.belongsToMany(models.User, {
+				through: models.Subscription,
+				foreignKey: "subId",
+				otherKey: "userId",
+				as: "Mods",
+				onDelete: "CASCADE"
+			});
+			// Subreadit -|--< Subscriptions Association
 			Subreadit.hasMany(models.Subscription, {
 				foreignKey: "subId",
 				onDelete: "CASCADE",
@@ -91,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
 			sequelize,
 			modelName: "Subreadit",
 			scopes: {
-				singleSub() {
+				allSubreadits() {
 					const { Subscription, User } = require(".");
 					return {
 						attributes: {
@@ -100,22 +110,70 @@ module.exports = (sequelize, DataTypes) => {
 									sequelize.fn("COUNT", sequelize.col("Subscriptions.id")),
 									"SubscriberCount"
 								]
-							]
+							],
+							exclude: ["createdAt", "updatedAt"]
 						},
 						include: [
-							{
-								model: Subscription,
-								attributes: [],
-								as: "Subscriptions",
-								required: false
-							},
 							{
 								model: User,
 								as: "Admin",
 								attributes: ["id", "username"]
+							},
+							{
+								model: Subscription,
+								attributes: [],
+								as: "Subscriptions"
 							}
 						],
-						group: ["Subreadit.id", "Admin.id"]
+						group: ["Admin.id", "Subreadit.id"]
+					};
+				},
+				singleSubreadit() {
+					const { Subscription, User } = require(".");
+					return {
+						attributes: {
+							include: [
+								[
+									sequelize.fn("COUNT", sequelize.col("Subscriptions.id")),
+									"SubscriberCount"
+								]
+							],
+							exclude: ["createdAt", "updatedAt"]
+						},
+						include: [
+							{
+								model: User,
+								as: "Admin",
+								attributes: ["id", "email", "username"]
+							},
+							{
+								model: User,
+								through: {
+									model: Subscription,
+									attributes: [],
+									where: {
+										status: "Mod"
+									}
+								},
+								attributes: ["id", "email", "username"],
+								as: "Mods"
+							},
+							{
+								model: Subscription,
+								attributes: [],
+								as: "Subscriptions"
+							},
+							{
+								model: User,
+								through: {
+									model: Subscription,
+									attributes: []
+								},
+								attributes: ["id", "email", "username"],
+								as: "Subscribers"
+							}
+						],
+						group: ["Admin.id", "Subreadit.id", "Subscribers.id", "Mods.id"]
 					};
 				}
 			}

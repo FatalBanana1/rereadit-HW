@@ -16,7 +16,7 @@ const { ValidationError } = require("sequelize");
 
 // check env: prod or dev
 const { environment } = require("./config");
-const e = require("express");
+// const e = require("express");
 const isProduction = environment === "production";
 
 const app = express();
@@ -37,7 +37,7 @@ if (!isProduction) {
 //helmet helps set vareity of headers to secure app
 app.use(
 	helmet.crossOriginResourcePolicy({
-		policy: "cross-origin",
+		policy: "cross-origin"
 	})
 );
 
@@ -47,14 +47,13 @@ app.use(
 		cookie: {
 			secure: isProduction,
 			sameSite: isProduction && "Lax",
-			httpOnly: true,
-		},
+			httpOnly: true
+		}
 	})
 );
 
 // MUST go BEFORE error handlers + middleware
 app.use(routes); // connect all the routes
-
 //favicon
 app.get("/favicon.ico", (req, res) => {
 	return res.json("./favicon/favicon.ico");
@@ -71,7 +70,7 @@ app.use((_req, _res, next) => {
 app.use((err, _req, res, next) => {
 	// check if err is from sqlize
 	if (err instanceof ValidationError) {
-		err.errors = err.errors.map((e) => e.message);
+		err.errors = err.errors.map(e => e.message);
 		err.title = `Validation Error`;
 		err.status = 404;
 	}
@@ -88,7 +87,7 @@ app.use((err, _req, res, _next) => {
 		title: err.title || `Server Error`,
 		message: err.message,
 		errors: err.errors,
-		stack: isProduction ? null : err.stack,
+		stack: isProduction ? null : err.stack
 	});
 });
 
