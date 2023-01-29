@@ -2,6 +2,8 @@ NOTES--WH
 Discuss what data we need for get all/vs get single routes
 Discuss on delete cascade, specifically with comments/child comments
 Discuss subreadit/subscription/user associations
+Discuss User feature, specifically GET all subreadits that a user is subscribed to. Also prevent user from subscribing
+to the same sub twice. (Require unique subreadit/user combination on subscription insertion)
 ---------------------------------------
 Henry
 
@@ -11,8 +13,8 @@ TODO:
 3. Post model associations ✅
 4. Comment model associations ✅
 5. Seed Data ✅
-6. Feature 1 routes:
-    Subreadit scopes
+6. Feature 1 routes ✅
+7. Subreadit scopes ✅
 
 
 
