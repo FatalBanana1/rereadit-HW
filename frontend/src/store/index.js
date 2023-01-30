@@ -6,7 +6,7 @@ import subreaditsReducer from "./subreadits";
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
-	subreadit: subreaditsReducer,
+	subreadits: subreaditsReducer,
 });
 
 let enhancer;

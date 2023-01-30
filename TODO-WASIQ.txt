@@ -7,7 +7,6 @@ TODO:
 
 -update the schema diagrams on wiki + readme
 
--frontend:
 
 ---------------------------------------
 Notes:
@@ -15,7 +14,8 @@ Notes:
 -1/30
 
 -merged henry to dev - bugs fixed
--
+-added 1st feat comps - not complete
+-added subreadit index comp = get all subreadits route
 
 
 

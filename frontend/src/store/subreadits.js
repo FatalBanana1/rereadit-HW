@@ -138,23 +138,20 @@ function defaultState() {
 const subreaditsReducer = (state = defaultState(), action) => {
 	switch (action.type) {
 		case READ_SUBREADITS: {
-			console.log(`reducer>>> ACTION: `, action);
+			// console.log(`reducer>>> ACTION: `, action);
+			console.log(`reducer>>> ACTION: `, action.subreadits);
 
-			const newGroups = action.subreadit.Subreadits.reduce(
-				(acc, group) => {
-					acc[group.id] = group;
-					return acc;
-				},
-				{}
-			);
+			const newSubs = action.subreadits.reduce((acc, sub) => {
+				acc[sub.id] = sub;
+				return acc;
+			}, {});
 			return {
 				...state,
-				...newGroups,
+				...newSubs,
 			};
 		}
 
 		case READ_SUBREADIT_DETAILS: {
-			action.group["privated"] = action.group.private;
 			return {
 				...state,
 				...action.group,
