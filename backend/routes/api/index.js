@@ -49,7 +49,7 @@ router.get("/require-auth", requireAuth, (req, res) => {
 
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
-router.use("/subreadits", subreaditsRouter);
+router.use("/sub", subreaditsRouter);
 
 router.post("/test", (req, res) => {
 	res.json({ requestBody: req.body });
