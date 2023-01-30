@@ -123,19 +123,9 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.STRING.BINARY,
 				allowNull: false,
 				validate: {
-<<<<<<< HEAD
-					len: [60, 60],
-				},
-			},
-			picUrl: {
-				type: DataTypes.TEXT,
-				allowNull: true,
-			},
-=======
 					len: [60, 60]
 				}
 			}
->>>>>>> henry
 		},
 		{
 			sequelize,
