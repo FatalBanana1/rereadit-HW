@@ -2,64 +2,69 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Post extends Model {
-		/**
-		 * Helper method for defining associations.
-		 * This method is not a part of Sequelize lifecycle.
-		 * The `models/index` file will call this method automatically.
-		 */
 		static associate(models) {
-			// define association here
-
-			Post.belongsTo(models.Subreadit, {
-				foreignKey: "subId",
-				onDelete: "CASCADE",
-			});
-
+			// User -|--< Posts association
 			Post.belongsTo(models.User, {
 				foreignKey: "userId",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
-
+			// Post -|---< Comments association
 			Post.hasMany(models.Comment, {
 				foreignKey: "postId",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
+			});
+			// Subreadit -|--< Post association
+			Post.belongsTo(models.Subreadit, {
+				foreignKey: "subId",
+				onDelete: "CASCADE"
 			});
 		}
 	}
 	Post.init(
 		{
-			title: {
-				type: DataTypes.STRING(50),
-				allowNull: false,
-			},
 			userId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Users",
+					model: "Users"
 				},
-				onDelete: "CASCADE",
-				allowNull: false,
+				onDelete: "CASCADE"
 			},
 			subId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Subreadits",
+					model: "Subreadits"
 				},
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
+			},
+			title: {
+				type: DataTypes.STRING,
 				allowNull: false,
+				validate: {
+					max: 50,
+					min: 5
+				}
 			},
 			text: {
 				type: DataTypes.TEXT,
-				allowNull: false,
+				allowNull: false
+			},
+			picUrl: {
+				type: DataTypes.TEXT,
+				allowNull: true
 			},
 			linkUrl: {
 				type: DataTypes.TEXT,
-				allowNull: true,
-			},
+				allowNull: true
+			}
 		},
 		{
 			sequelize,
 			modelName: "Post",
+			scopes: {
+				singlePost() {
+					return {};
+				}
+			}
 		}
 	);
 	return Post;

@@ -3,25 +3,39 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Subreadit extends Model {
 		static associate(models) {
-
+			// User -|--< Subreadits Amin Association
 			Subreadit.belongsTo(models.User, {
 				foreignKey: "adminId",
 				as: "Admin",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
-
+			// Subreadits -|--< Subscriptions >--|- Users Associations
+			// Subscribers
 			Subreadit.belongsToMany(models.User, {
 				through: models.Subscription,
 				foreignKey: "subId",
 				otherKey: "userId",
 				as: "Subscribers",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
-
+			// Mods
+			Subreadit.belongsToMany(models.User, {
+				through: models.Subscription,
+				foreignKey: "subId",
+				otherKey: "userId",
+				as: "Mods",
+				onDelete: "CASCADE"
+			});
+			// Subreadit -|--< Subscriptions Association
 			Subreadit.hasMany(models.Subscription, {
 				foreignKey: "subId",
 				onDelete: "CASCADE",
-				as: "Subscriptions",
+				as: "Subscriptions"
+			});
+			// Subreadit -|--< Posts association
+			Subreadit.hasMany(models.Post, {
+				foreignKey: "subId",
+				onDelete: "CASCADE"
 			});
 
 			Subreadit.hasMany(models.Post, {
@@ -35,22 +49,22 @@ module.exports = (sequelize, DataTypes) => {
 			adminId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Users",
-				},
+					model: "Users"
+				}
 			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					len: [2, 60],
-				},
+					len: [2, 60]
+				}
 			},
 			about: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
-					min: 50,
-				},
+					min: 50
+				}
 			},
 			category: {
 				type: DataTypes.ENUM,
@@ -74,55 +88,100 @@ module.exports = (sequelize, DataTypes) => {
 					"Support",
 					"Technology",
 					"Travel",
-					"Writing",
+					"Writing"
 				],
 				defaultValue: "Hobbies",
-				allowNull: false,
+				allowNull: false
 			},
 			bannerImage: {
 				type: DataTypes.TEXT,
-				allowNull: true,
+				allowNull: true
 			},
 			circleImage: {
 				type: DataTypes.TEXT,
-				allowNull: true,
-			},
+				allowNull: true
+			}
 		},
 		{
 			sequelize,
 			modelName: "Subreadit",
 			scopes: {
-				singleSub() {
+				allSubreadits() {
 					const { Subscription, User } = require(".");
 					return {
 						attributes: {
 							include: [
 								[
-									sequelize.fn(
-										"COUNT",
-										sequelize.col("Subscriptions.id")
-									),
-									"SubscriberCount",
-								],
+									sequelize.fn("COUNT", sequelize.col("Subscriptions.id")),
+									"SubscriberCount"
+								]
 							],
+							exclude: ["createdAt", "updatedAt"]
 						},
 						include: [
 							{
+								model: User,
+								as: "Admin",
+								attributes: ["id", "username"]
+							},
+							{
 								model: Subscription,
 								attributes: [],
-								as: "Subscriptions",
-								required: false,
-							},
+								as: "Subscriptions"
+							}
+						],
+						group: ["Admin.id", "Subreadit.id"]
+					};
+				},
+				singleSubreadit() {
+					const { Subscription, User } = require(".");
+					return {
+						attributes: {
+							include: [
+								[
+									sequelize.fn("COUNT", sequelize.col("Subscriptions.id")),
+									"SubscriberCount"
+								]
+							],
+							exclude: ["createdAt", "updatedAt"]
+						},
+						include: [
 							{
 								model: User,
 								as: "Admin",
-								attributes: ["id", "username"],
+								attributes: ["id", "email", "username"]
 							},
+							{
+								model: User,
+								through: {
+									model: Subscription,
+									attributes: [],
+									where: {
+										status: "Mod"
+									}
+								},
+								attributes: ["id", "email", "username"],
+								as: "Mods"
+							},
+							{
+								model: Subscription,
+								attributes: [],
+								as: "Subscriptions"
+							},
+							{
+								model: User,
+								through: {
+									model: Subscription,
+									attributes: []
+								},
+								attributes: ["id", "email", "username"],
+								as: "Subscribers"
+							}
 						],
-						group: ["Subreadit.id", "Admin.id"],
+						group: ["Admin.id", "Subreadit.id", "Subscribers.id", "Mods.id"]
 					};
-				},
-			},
+				}
+			}
 		}
 	);
 	return Subreadit;
