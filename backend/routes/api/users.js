@@ -9,7 +9,7 @@ const { check } = require("express-validator");
 const {
 	handleValidationErrors,
 	validateSignup
-} = require("../../utils/validation");
+} = require("../../utils/validation-chains");
 const router = express.Router();
 
 // routes
