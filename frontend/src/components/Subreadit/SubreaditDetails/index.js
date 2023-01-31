@@ -21,30 +21,32 @@ const SubreaditDetails = () => {
 			.catch((e) => e.errors);
 	}, [dispatch]);
 
-	let sub = useSelector((state) => state.subreadits);
+	let subs = useSelector((state) => state.subreadits);
 
-	let {
-		Admin,
-		SubscriberCount,
-		Subscribers,
-		Mods,
-		about,
-		adminId,
-		bannerImage,
-		category,
-		circleImage,
-		id,
-		name,
-	} = sub;
+	let sub = subs[subId];
 
-	if (!id) return null;
-	let mods = Object.values(Mods);
+	if (isLoaded) {
+		let {
+			Admin,
+			SubscriberCount,
+			Subscribers,
+			Mods,
+			about,
+			adminId,
+			bannerImage,
+			category,
+			circleImage,
+			id,
+			name,
+		} = sub;
 
-	//return
-	return (
-		<div>
-			<div>Subreadit Details</div>
-			{isLoaded && (
+		let mods = Object.values(Mods);
+
+		//return
+		return (
+			<div>
+				<div>Subreadit Details</div>
+
 				<div className="subs-container">
 					<div>{name}</div>
 					<div>{`About: ${about}`}</div>
@@ -60,9 +62,9 @@ const SubreaditDetails = () => {
 					<div>{`Created by: ${Admin.username}`}</div>
 					<div>{`${SubscriberCount} Subscribers`}</div>
 				</div>
-			)}
-		</div>
-	);
+			</div>
+		);
+	} else return null;
 };
 
 export default SubreaditDetails;

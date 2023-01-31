@@ -20,7 +20,6 @@ const SubreaditIndex = () => {
 	}, [dispatch]);
 
 	let subs = useSelector((state) => state.subreadits);
-
 	let subreadits = Object.values(subs);
 
 	//return

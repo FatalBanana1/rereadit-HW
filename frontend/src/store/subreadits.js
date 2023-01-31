@@ -152,9 +152,10 @@ const subreaditsReducer = (state = defaultState(), action) => {
 
 		case READ_SUBREADIT_DETAILS: {
 			// console.log(`reducer>>> ACTION: `, action.subreadit);
+			const newSub = { ...action.subreadit };
 			return {
 				...state,
-				...action.subreadit,
+				[action.subreadit.id]: newSub,
 			};
 		}
 
