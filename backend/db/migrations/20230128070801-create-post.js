@@ -10,8 +10,8 @@ module.exports = {
 				type: Sequelize.INTEGER,
 			},
 			title: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
+				type: Sequelize.STRING(50),
+				allowNull: false,
 			},
 			userId: {
 				type: Sequelize.INTEGER,
@@ -30,23 +30,23 @@ module.exports = {
 				allowNull: false,
 			},
 			text: {
-        type: Sequelize.TEXT,
-        allowNull: false,
+				type: Sequelize.TEXT,
+				allowNull: false,
 			},
 			linkUrl: {
-        type: Sequelize.TEXT,
-        allowNull: true,
+				type: Sequelize.TEXT,
+				allowNull: true,
 			},
 			createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
-      },
+				allowNull: false,
+				type: Sequelize.DATE,
+				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
+			updatedAt: {
+				allowNull: false,
+				type: Sequelize.DATE,
+				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+			},
 		});
 	},
 	async down(queryInterface, Sequelize) {
