@@ -7,7 +7,7 @@ import { csrfFetch } from "./csrf";
 
 //types crud - subreadits
 const READ_SUBREADITS = `subreadits/READ`;
-const READ_SUBREADIT_DETAILS = `subreadits/READ`;
+const READ_SUBREADIT_DETAILS = `subreadit/READ_DETAILS`;
 const CREATE_SUBREADIT = `subreadits/CREATE`;
 const UPDATE_SUBREADIT = `subreadits/UPDATE`;
 const DELETE_SUBREADIT = `subreadits/DELETE`;
@@ -59,7 +59,7 @@ export const actionResetSubreadits = () => ({
 export const thunkReadSubreadits = () => async (dispatch) => {
 	let response = await csrfFetch(`/api/sub`);
 
-	console.log(`thunk>>> response: `, response);
+	// console.log(`thunk>>> response: `, response);
 
 	if (response.ok) {
 		const subs = await response.json();
@@ -70,9 +70,9 @@ export const thunkReadSubreadits = () => async (dispatch) => {
 
 // GET: Get Subreadit Details Route: /api/sub/:subId
 export const thunkReadSubreaditDetails = (payload) => async (dispatch) => {
-	// console.log(`response = thunk -----------`, payload);
-	const response = await csrfFetch(`/api/sub/${payload}`);
+	const response = await csrfFetch(`/api/sub/${payload.subId}`);
 
+	// console.log(`thunk>>> response: `, response);
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionReadSubreaditDetails(subs));
@@ -139,7 +139,6 @@ const subreaditsReducer = (state = defaultState(), action) => {
 	switch (action.type) {
 		case READ_SUBREADITS: {
 			// console.log(`reducer>>> ACTION: `, action);
-			console.log(`reducer>>> ACTION: `, action.subreadits);
 
 			const newSubs = action.subreadits.reduce((acc, sub) => {
 				acc[sub.id] = sub;
@@ -152,9 +151,10 @@ const subreaditsReducer = (state = defaultState(), action) => {
 		}
 
 		case READ_SUBREADIT_DETAILS: {
+			// console.log(`reducer>>> ACTION: `, action.subreadit);
 			return {
 				...state,
-				...action.group,
+				...action.subreadit,
 			};
 		}
 

@@ -20,7 +20,6 @@ const SubreaditIndex = () => {
 	}, [dispatch]);
 
 	let subs = useSelector((state) => state.subreadits);
-	console.log(`SUBS ======`, subs);
 
 	let subreadits = Object.values(subs);
 
@@ -31,7 +30,7 @@ const SubreaditIndex = () => {
 			{isLoaded && (
 				<div className="subs-container">
 					{subreadits.map((sub) => (
-						<NavLink to={`/sub/${sub.id}`}>
+						<NavLink key={sub.id} to={`/sub/${sub.id}`}>
 							<ReadSubreadit sub={sub} />
 						</NavLink>
 					))}
