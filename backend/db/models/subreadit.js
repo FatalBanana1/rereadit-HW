@@ -37,6 +37,11 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "subId",
 				onDelete: "CASCADE"
 			});
+
+			Subreadit.hasMany(models.Post, {
+				foreignKey: "subId",
+				onDelete: "CASCADE",
+			});
 		}
 	}
 	Subreadit.init(

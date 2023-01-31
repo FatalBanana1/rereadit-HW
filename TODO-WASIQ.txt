@@ -5,25 +5,19 @@ Wasiq
 ---------------------------------------
 TODO:
 
--fix relationships for subscriptions and users and subreadits
+-update the schema diagrams on wiki + readme
+
 
 ---------------------------------------
 Notes:
 
--1/27
+-1/30
 
--updated the dev branch after correcting mistakes
--added demo logins for 4 users for rigorous testing on crud, through different status
--fixed all sub-re-readits to subreadits
-	-adjusted route imports for validations on sub-re-readits
--rework: all 3 existing tables to update to the schema design
--rework: migrations and models for users, subscriptions, subreadits
--added seeders for subscribers, users, subreadits
--rework: changed wording from mod to status on subscriptions
-	-from organizer and organizerId to admin adminId on subreadits
--demo user 1 is set to admin on all 3 subreadits
--added images to seeders for subreadits
--removed groups files from seeders, mig, models, routes/api, routes/index
+-merged henry to dev - bugs fixed
+-added 1st feat comps - not complete
+-added subreadit index comp = get all subreadits route
+
+
 
 
 ---------------------------------------

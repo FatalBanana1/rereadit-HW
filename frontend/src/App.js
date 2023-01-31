@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Home from "./components/Home";
+import SubreaditIndex from "./components/Subreadit/SubreaditIndex";
+import SubreaditDetails from "./components/Subreadit/SubreaditDetails";
 
 function App() {
 	const dispatch = useDispatch();
@@ -17,8 +19,20 @@ function App() {
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
-					<Route exact to="/">
+					<Route exact path="/">
 						<Home />
+					</Route>
+
+					<Route exact path="/sub">
+						<SubreaditIndex />
+					</Route>
+
+					<Route path="/sub/:subId">
+						<SubreaditDetails />
+					</Route>
+
+					<Route>
+						<div>Error 404: Not Found.</div>
 					</Route>
 				</Switch>
 			)}

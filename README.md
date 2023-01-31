@@ -1,10 +1,10 @@
-# Rereadit
+# Rereadit - by Henry and Wasiq
 
 ## Database Schema Design
 
-![meetup-dbdiagram]
+![rereadit-dbdiagram]
 
-[meetup-dbdiagram]: ./meetup-wr-diagram.png
+[rereadit-dbdiagram]: ./rereadit-schema.png
 
 ## API Documentation
 
