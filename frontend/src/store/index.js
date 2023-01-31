@@ -1,5 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import commentsReducer from "./comments";
+import postsReducer from "./posts";
 
 import sessionReducer from "./session";
 import subreaditsReducer from "./subreadits";
@@ -7,6 +9,8 @@ import subreaditsReducer from "./subreadits";
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	subreadits: subreaditsReducer,
+	posts: postsReducer,
+	comments: commentsReducer,
 });
 
 let enhancer;

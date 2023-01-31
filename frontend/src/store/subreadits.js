@@ -22,7 +22,7 @@ const actionReadSubreadits = (subreadits) => ({
 	subreadits,
 });
 
-//read group details
+//read subreadit details
 const actionReadSubreaditDetails = (subreadit) => ({
 	type: READ_SUBREADIT_DETAILS,
 	subreadit,
@@ -162,18 +162,18 @@ const subreaditsReducer = (state = defaultState(), action) => {
 		case CREATE_SUBREADIT: {
 			const newState = {
 				...state,
-				[action.group.id]: action.group,
+				[action.subreadit.id]: action.subreadit,
 			};
 			return newState;
 		}
 
 		case UPDATE_SUBREADIT: {
-			return { ...state, ...(state[action.group.id] = action.group) };
+			return { ...state, ...(state[action.subreadit.id] = action.subreadit) };
 		}
 
 		case DELETE_SUBREADIT: {
 			const newState = { ...state };
-			delete newState[action.group.id];
+			delete newState[action.subreadit.id];
 			return newState;
 		}
 
