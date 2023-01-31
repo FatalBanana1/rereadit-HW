@@ -17,38 +17,38 @@ const RESET_SUBREADIT = "subreadits/resetState";
 
 //regular actions
 //read
-const actionReadSubreadits = (subreadits) => ({
+const actionReadSubreadits = subreadits => ({
 	type: READ_SUBREADITS,
-	subreadits,
+	subreadits
 });
 
 //read subreadit details
-const actionReadSubreaditDetails = (subreadit) => ({
+const actionReadSubreaditDetails = subreadit => ({
 	type: READ_SUBREADIT_DETAILS,
-	subreadit,
+	subreadit
 });
 
 //create
-const actionCreateSubreadit = (subreadit) => ({
+const actionCreateSubreadit = subreadit => ({
 	type: CREATE_SUBREADIT,
-	subreadit,
+	subreadit
 });
 
 //update
-const actionUpdateSubreadit = (subreadit) => ({
+const actionUpdateSubreadit = subreadit => ({
 	type: UPDATE_SUBREADIT,
-	subreadit,
+	subreadit
 });
 
 //delete
-const actionDeleteSubreadit = (subreadit) => ({
+const actionDeleteSubreadit = subreadit => ({
 	type: DELETE_SUBREADIT,
-	subreadit,
+	subreadit
 });
 
 //reset
 export const actionResetSubreadits = () => ({
-	type: RESET_SUBREADIT,
+	type: RESET_SUBREADIT
 });
 
 //----------------------------------------------
@@ -56,7 +56,7 @@ export const actionResetSubreadits = () => ({
 //thunk actions
 
 // GET: Get All Subreadits Route: /api/sub
-export const thunkReadSubreadits = () => async (dispatch) => {
+export const thunkReadSubreadits = () => async dispatch => {
 	let response = await csrfFetch(`/api/sub`);
 
 	// console.log(`thunk>>> response: `, response);
@@ -69,7 +69,7 @@ export const thunkReadSubreadits = () => async (dispatch) => {
 };
 
 // GET: Get Subreadit Details Route: /api/sub/:subId
-export const thunkReadSubreaditDetails = (payload) => async (dispatch) => {
+export const thunkReadSubreaditDetails = payload => async dispatch => {
 	const response = await csrfFetch(`/api/sub/${payload.subId}`);
 
 	// console.log(`thunk>>> response: `, response);
@@ -81,11 +81,11 @@ export const thunkReadSubreaditDetails = (payload) => async (dispatch) => {
 };
 
 // POST: Create a Group Route: /api/sub
-export const thunkCreateSubreadit = (payload) => async (dispatch) => {
+export const thunkCreateSubreadit = payload => async dispatch => {
 	const response = await csrfFetch(`/api/sub`, {
 		method: `POST`,
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(payload),
+		body: JSON.stringify(payload)
 	});
 
 	if (response.ok) {
@@ -96,11 +96,11 @@ export const thunkCreateSubreadit = (payload) => async (dispatch) => {
 };
 
 // PUT: Edit a Subreadit Route: /api/sub/:subId
-export const thunkUpdateSubreadit = (payload) => async (dispatch) => {
+export const thunkUpdateSubreadit = payload => async dispatch => {
 	const response = await csrfFetch(`/api/sub/${payload.id}`, {
 		method: `PUT`,
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(payload),
+		body: JSON.stringify(payload)
 	});
 
 	if (response.ok) {
@@ -111,11 +111,11 @@ export const thunkUpdateSubreadit = (payload) => async (dispatch) => {
 };
 
 // DELETE: Delete Subreadit Route: /api/sub/:subId
-export const thunkDeleteSubreadit = (payload) => async (dispatch) => {
+export const thunkDeleteSubreadit = payload => async dispatch => {
 	const response = await csrfFetch(`/api/sub/${payload.subId}`, {
 		method: `DELETE`,
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(payload),
+		body: JSON.stringify(payload)
 	});
 
 	// console.log(`group id in THUNK>>>>>>>`,response);
@@ -146,7 +146,7 @@ const subreaditsReducer = (state = defaultState(), action) => {
 			}, {});
 			return {
 				...state,
-				...newSubs,
+				...newSubs
 			};
 		}
 
@@ -155,37 +155,25 @@ const subreaditsReducer = (state = defaultState(), action) => {
 			const newSub = { ...action.subreadit };
 			return {
 				...state,
-				[action.subreadit.id]: newSub,
+				[action.subreadit.id]: newSub
 			};
 		}
 
 		case CREATE_SUBREADIT: {
 			const newState = {
 				...state,
-<<<<<<< HEAD
-				[action.group.id]: action.group,
-=======
-				[action.subreadit.id]: action.subreadit,
->>>>>>> 395a787217efe3aacf666ee5a950d8327df79fc6
+				[action.subreadit.id]: action.subreadit
 			};
 			return newState;
 		}
 
 		case UPDATE_SUBREADIT: {
-<<<<<<< HEAD
-			return { ...state, ...(state[action.group.id] = action.group) };
-=======
 			return { ...state, ...(state[action.subreadit.id] = action.subreadit) };
->>>>>>> 395a787217efe3aacf666ee5a950d8327df79fc6
 		}
 
 		case DELETE_SUBREADIT: {
 			const newState = { ...state };
-<<<<<<< HEAD
-			delete newState[action.group.id];
-=======
 			delete newState[action.subreadit.id];
->>>>>>> 395a787217efe3aacf666ee5a950d8327df79fc6
 			return newState;
 		}
 
