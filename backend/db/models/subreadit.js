@@ -125,6 +125,7 @@ module.exports = (sequelize, DataTypes) => {
 								as: "Subscriptions"
 							}
 						],
+						order: [["id", "DESC"]],
 						group: ["Admin.id", "Subreadit.id"]
 					};
 				},

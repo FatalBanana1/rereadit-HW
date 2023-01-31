@@ -20,7 +20,7 @@ module.exports = {
 					userId: 1,
 					subId: 1,
 					title: "The first ever post in the Python subreadit",
-					text: "I didn'nt like Python at first because I'm afraid of change",
+					text: "I didn't like Python at first because I'm afraid of change",
 					linkUrl: "https://www.youtube.com/watch?v=eBGIQ7ZuuiU"
 				},
 				{
@@ -41,7 +41,7 @@ module.exports = {
 					userId: 1,
 					subId: 1,
 					title: "fourth",
-					text: "I'm just here so I don'nt get fined",
+					text: "I'm just here so I don't get fined",
 					linkUrl: "https://www.youtube.com/watch?v=eBGIQ7ZuuiU"
 				},
 				{
