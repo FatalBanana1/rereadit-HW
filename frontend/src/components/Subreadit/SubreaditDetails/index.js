@@ -37,6 +37,7 @@ const SubreaditDetails = () => {
 		name,
 	} = sub;
 
+	if (!id) return null;
 	let mods = Object.values(Mods);
 
 	//return
