@@ -1,5 +1,5 @@
 {
-	"name": "authenticate-me",
+	"name": "rereadit-hw",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
@@ -15,12 +15,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/FatalBanana1/api-project-WR.git"
+		"url": ""
 	},
 	"author": "wasiq-rashid",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/FatalBanana1/api-project-WR/issues"
+		"url": "."
 	},
-	"homepage": "https://github.com/FatalBanana1/api-project-WR#readme"
+	"homepage": "."
 }

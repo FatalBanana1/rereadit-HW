@@ -104,7 +104,7 @@ function LoginFormModal() {
 			</div>
 
 			<div className="users">
-				<button onClick={demoSignin3}>Demo User (Wizard)</button>
+				<button onClick={demoSignin4}>Demo User (Wizard)</button>
 			</div>
 		</>
 	);

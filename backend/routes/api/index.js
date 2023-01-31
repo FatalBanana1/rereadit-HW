@@ -50,7 +50,7 @@ router.get("/require-auth", requireAuth, (req, res) => {
 
 router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
-router.use("/subreadits", subreaditsRouter);
+router.use("/sub", subreaditsRouter);
 router.use("/posts", postsRouter);
 
 router.post("/test", (req, res) => {
