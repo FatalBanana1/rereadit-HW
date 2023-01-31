@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
 			// Post -|---< Comment association
 			Comment.belongsTo(models.Post, {
 				foreignKey: "postId",
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
+				as: "PostComments"
 			});
 			// User -|---< Comment association
 			Comment.belongsTo(models.User, {

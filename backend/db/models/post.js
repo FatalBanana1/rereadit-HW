@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
 			// Post -|---< Comments association
 			Post.hasMany(models.Comment, {
 				foreignKey: "postId",
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
+				as: "PostComments"
 			});
 			// Subreadit -|--< Post association
 			Post.belongsTo(models.Subreadit, {
@@ -61,6 +62,37 @@ module.exports = (sequelize, DataTypes) => {
 			sequelize,
 			modelName: "Post",
 			scopes: {
+				allPosts() {
+					const { Subreadit, User, Comment } = require(".");
+					return {
+						attributes: {
+							include: [
+								[
+									sequelize.fn("COUNT", sequelize.col("PostComments.id")),
+									"CommentCount"
+								]
+							],
+							exclude: ["createdAt", "updatedAt", "userId", "subId"]
+						},
+						include: [
+							{
+								model: User,
+								attributes: ["id", "username"]
+							},
+							{
+								model: Subreadit,
+								attributes: ["id", "name"]
+							},
+							{
+								model: Comment,
+								attributes: [],
+								as: "PostComments"
+							}
+						],
+						order: [["id", "DESC"]],
+						group: ["Post.id"]
+					};
+				},
 				singlePost() {
 					return {};
 				}
