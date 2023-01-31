@@ -6,16 +6,9 @@ const express = require("express");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User } = require("../../db/models");
 const { check } = require("express-validator");
-<<<<<<< HEAD
-const {
-	handleValidationErrors,
-	validateSignup
-} = require("../../utils/validation-chains");
-=======
 const { handleValidationErrors } = require("../../utils/validation");
 const { validateSignup } = require("../../utils/validation-chains.js");
 
->>>>>>> 8d10c9a7cb675902f3bda215150e199451efb184
 const router = express.Router();
 
 // routes
