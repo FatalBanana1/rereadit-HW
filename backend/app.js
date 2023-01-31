@@ -16,7 +16,7 @@ const { ValidationError } = require("sequelize");
 
 // check env: prod or dev
 const { environment } = require("./config");
-// const e = require("express");
+const e = require("express");
 const isProduction = environment === "production";
 
 const app = express();
