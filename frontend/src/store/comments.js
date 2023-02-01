@@ -60,7 +60,7 @@ export const actionResetComments = () => ({
 export const thunkReadComments = (payload) => async (dispatch) => {
 	let response = await csrfFetch(`/api/posts/${payload.postId}/comments`);
 
-	// console.log(`thunk>>> response: `, response);
+	console.log(`thunk>>> response: `, response);
 
 	if (response.ok) {
 		const comments = await response.json();

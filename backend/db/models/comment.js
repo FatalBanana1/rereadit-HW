@@ -61,7 +61,6 @@ module.exports = (sequelize, DataTypes) => {
 					return {
 						attributes: {
 							exclude: ["updatedAt", "userId"],
-							where: { parentId: null },
 						},
 						include: [
 							{

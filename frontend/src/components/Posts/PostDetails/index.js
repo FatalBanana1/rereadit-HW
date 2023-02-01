@@ -6,6 +6,8 @@ import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkReadPostDetails } from "../../../store/posts";
+import { thunkReadComments } from "../../../store/comments";
+import ReadComment from "../../Comments/ReadComment";
 
 //main
 const PostDetails = () => {
@@ -16,13 +18,22 @@ const PostDetails = () => {
 	useEffect(() => {
 		let payload = { postId };
 		dispatch(thunkReadPostDetails(payload))
+			.then(() => dispatch(thunkReadComments(payload)))
 			.then(() => setIsLoaded(true))
 			.catch((e) => e.errors);
 	}, [dispatch]);
 
 	let posts = useSelector((state) => state.posts);
-
+	let allComments = useSelector((state) => state.comments);
+	let comments = Object.values(allComments);
 	let post = posts[postId];
+
+	let parents = comments.filter((el) => el.parentId === null);
+	let children = comments.filter((el) => el.parentId != null);
+
+	console.log(`Inside comments comp =====`, comments);
+	console.log(`Inside PAR =====`, parents);
+	console.log(`Inside Child =====`, children);
 
 	if (isLoaded) {
 		let {
@@ -64,7 +75,19 @@ const PostDetails = () => {
 					<div className="spacing">{`${CommentCount} Comments`}</div>
 					<div className="spacing">{`From ${Subreadit.name}`}</div>
 				</div>
-				<div className="post-container">Comments:</div>
+				<div className="post-container">
+					{parents.map((comment, i) => {
+						if (i === parents.length - 1) {
+							// setParentsLoaded(true)
+						}
+						return (
+							<ReadComment key={comment.id} comment={comment} />
+						);
+					})}
+					{children.map((comment) => (
+						<ReadComment key={comment.id} comment={comment} />
+					))}
+				</div>
 			</div>
 		);
 	} else return null;
@@ -73,6 +96,8 @@ const PostDetails = () => {
 export default PostDetails;
 
 /*
+
+posts:
 
 {
 createdAt,
@@ -88,7 +113,18 @@ Subreadit{id, name},
 User{id, username},
 }
 
+comments:
 
+{
+PostComments {id, subId, userId},
+User {id, username},
+childComments,
+createdAt,
+id,
+parentId,
+postId,
+text,
+}
 
 
 
