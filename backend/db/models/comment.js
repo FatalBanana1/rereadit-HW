@@ -5,12 +5,12 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// Self-referential parent/child associations
 			// Parent
-			Comment.hasMany(models.Comment, {
+			Comment.belongsTo(models.Comment, {
 				foreignKey: "parentId",
 				as: "parentComment",
 			});
 			// Children
-			Comment.belongsTo(models.Comment, {
+			Comment.hasMany(models.Comment, {
 				foreignKey: "parentId",
 				as: "childComments",
 			});
@@ -75,6 +75,52 @@ module.exports = (sequelize, DataTypes) => {
 							{
 								model: Comment,
 								as: "childComments",
+								include: [
+									{
+										model: User,
+										attributes: ["id", "username"],
+									},
+									{
+										model: Comment,
+										as: "childComments",
+										include: [
+											{
+												model: User,
+												attributes: ["id", "username"],
+											},
+											{
+												model: Comment,
+												as: "childComments",
+												include: [
+													{
+														model: User,
+														attributes: [
+															"id",
+															"username",
+														],
+													},
+													{
+														model: Comment,
+														as: "childComments",
+														include: [
+															{
+																model: User,
+																attributes: [
+																	"id",
+																	"username",
+																],
+															},
+															{
+																model: Comment,
+																as: "childComments",
+															},
+														],
+													},
+												],
+											},
+										],
+									},
+								],
 							},
 						],
 						order: [["id"]],

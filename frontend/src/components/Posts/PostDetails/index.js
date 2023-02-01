@@ -28,14 +28,50 @@ const PostDetails = () => {
 	let comments = Object.values(allComments);
 	let post = posts[postId];
 
-	let parents = comments.filter((el) => el.parentId === null);
-	let children = comments.filter((el) => el.parentId != null);
-
-	console.log(`Inside comments comp =====`, comments);
-	console.log(`Inside PAR =====`, parents);
-	console.log(`Inside Child =====`, children);
-
 	if (isLoaded) {
+		function dfs(el) {
+			let mapper = [];
+			let stack = [el];
+			while (stack) {
+				let curr = stack.pop();
+				if (curr) {
+					mapper.push(curr);
+				}
+				if (!curr || !curr.childComments) return mapper;
+				if (curr.childComments[0])
+					stack.push(allComments[curr.childComments[0].id]);
+			}
+			return mapper;
+		}
+
+		// list of children,
+		// reverse array
+		// start nesting with for loop
+		// function nesting(list) {
+		// 	if (list.length <= 1) return list;
+		// 	list[list.length - 2]["next"] = list[list.length - 1];
+
+		// 	return nesting(el, list.splice(0, list.length - 1));
+		// }
+
+		// let el = dfs(comments[4]);
+
+		// const dfs = function (start, target) {
+		// 	if (start.value === target) {
+		// 		return start;
+		// 	}
+		// 	for (var i = 0; i < start.children.length; i++) {
+		// 		var result = dfs(start.children[i], target);
+		// 		if (result != null) {
+		// 			return result;
+		// 		}
+		// 	}
+		// 	return null;
+		// };
+
+		// console.log(`NESTING el`, el);
+		// console.log(`NESTING LIST`, nesting(el));
+
 		let {
 			createdAt,
 			id,
@@ -75,18 +111,19 @@ const PostDetails = () => {
 					<div className="spacing">{`${CommentCount} Comments`}</div>
 					<div className="spacing">{`From ${Subreadit.name}`}</div>
 				</div>
+
 				<div className="post-container">
-					{parents.map((comment, i) => {
-						if (i === parents.length - 1) {
-							// setParentsLoaded(true)
+					{comments.map((comment) => {
+						if (comment.parentId) {
+						} else {
+							return (
+								<ReadComment
+									key={comment.id}
+									comment={comment}
+								/>
+							);
 						}
-						return (
-							<ReadComment key={comment.id} comment={comment} />
-						);
 					})}
-					{children.map((comment) => (
-						<ReadComment key={comment.id} comment={comment} />
-					))}
 				</div>
 			</div>
 		);

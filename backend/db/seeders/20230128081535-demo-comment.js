@@ -190,6 +190,12 @@ module.exports = {
 					text: "Kareem played 10 seasons with the 3-point shot available... and went 1-for-18. I don't think his scoring total would have increased by much if the 3-point line had been around for his first 10 seasons.",
 					parentId: 23,
 				},
+				{
+					userId: 6,
+					postId: 1,
+					text: "Your Welcome!!!",
+					parentId: 6,
+				},
 			],
 			{}
 		);
