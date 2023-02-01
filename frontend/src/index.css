@@ -1,5 +1,9 @@
 /* TODO Add site wide styles */
 
+.spacing {
+	margin: 5px 0px;
+}
+
 .readsub-container {
 	text-decoration: none;
 	color: black;
@@ -81,4 +85,5 @@ a {
 	border: 1px black solid;
 	padding: 0px 15px 15px 15px;
 	margin-left: 30vw;
+	margin-bottom: 10px;
 }

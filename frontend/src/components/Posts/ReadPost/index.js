@@ -35,10 +35,10 @@ const ReadPost = ({ post }) => {
 				{linkUrl ? (
 					<div target="_blank">{`Link: ${linkUrl}`}</div>
 				) : null}
-				<div>{`Created by: ${User.username}`}</div>
-				<div>{`${CommentCount} Comments`}</div>
-				<div>{`Posted ${month} ${day}, ${year}`}</div>
-				<div>{`From ${Subreadit.name}`}</div>
+				<div className="spacing">{`Created by: ${User.username}`}</div>
+				<div className="spacing">{`${CommentCount} Comments`}</div>
+				<div className="spacing">{`Posted ${month} ${day}, ${year}`}</div>
+				<div className="spacing">{`From ${Subreadit.name}`}</div>
 			</div>
 		);
 	} else return null;

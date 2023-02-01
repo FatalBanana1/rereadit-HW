@@ -57,10 +57,11 @@ module.exports = (sequelize, DataTypes) => {
 			modelName: "Comment",
 			scopes: {
 				allComments() {
-					const { Subreadit, User, Post } = require(".");
+					const { User, Post } = require(".");
 					return {
 						attributes: {
 							exclude: ["updatedAt", "userId"],
+							where: { parentId: null },
 						},
 						include: [
 							{
@@ -68,16 +69,16 @@ module.exports = (sequelize, DataTypes) => {
 								attributes: ["id", "username"],
 							},
 							{
-								model: Subreadit,
-								attributes: ["id", "name"],
+								model: Post,
+								as: "PostComments",
+								attributes: ["id", "subId", "userId"],
 							},
 							{
-								model: Post,
-								as: "Post",
+								model: Comment,
+								as: "childComments",
 							},
 						],
-						order: [["id", "DESC"]],
-						// group: ["Post.id"],
+						order: [["id"]],
 					};
 				},
 			},

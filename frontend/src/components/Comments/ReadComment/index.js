@@ -9,22 +9,22 @@
 
 //main
 const ReadComment = ({ comment }) => {
-	// let {
-	// 	CommentCount,
-	// 	Subreadit,
-	// 	User,
-	// 	id,
-	// 	linkUrl,
-	// 	picUrl,
-	// 	text,
-	// 	title,
-	// 	createdAt,
-	// } = post;
-	// //dates
-	// let date = new Date(createdAt).toString().split(" ");
-	// let month = date[1];
-	// let day = date[2];
-	// let year = date[3];
+	let {
+		id,
+		postId,
+		parentId,
+		text,
+		createdAt,
+		User,
+		PostComments,
+		childComments,
+	} = comment;
+
+	//dates
+	let date = new Date(createdAt).toString().split(" ");
+	let month = date[1];
+	let day = date[2];
+	let year = date[3];
 
 	return (
 		<>
@@ -55,7 +55,14 @@ export default ReadComment;
 /*
 
 {
-
+id,
+postId,
+parentId,
+text,
+createdAt,
+User { id, username},
+PostComments { id, subId, userId},
+childComments
 }
 
 */

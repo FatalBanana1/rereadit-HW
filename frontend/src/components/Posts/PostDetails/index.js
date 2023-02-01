@@ -59,11 +59,12 @@ const PostDetails = () => {
 							target="_blank"
 						>{`Link: ${linkUrl}`}</a>
 					) : null}
-					<div>{`By: ${User.username}`}</div>
-					<div>{`Posted ${month} ${day}, ${year}`}</div>
-					<div>{`Comments: ${CommentCount}`}</div>
-					<div>{`From ${Subreadit.name}`}</div>
+					<div className="spacing">{`By: ${User.username}`}</div>
+					<div className="spacing">{`Posted ${month} ${day}, ${year}`}</div>
+					<div className="spacing">{`${CommentCount} Comments`}</div>
+					<div className="spacing">{`From ${Subreadit.name}`}</div>
 				</div>
+				<div className="post-container">Comments:</div>
 			</div>
 		);
 	} else return null;
