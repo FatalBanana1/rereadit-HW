@@ -23,7 +23,7 @@ const ReadSubreadit = ({ sub }) => {
 	//return
 	return (
 		<div className="readsub-container">
-			<div>{`${name}`}</div>
+			<h3>{`${name}`}</h3>
 			<div>{`About: ${about}`}</div>
 			<div>{`Created by: ${Admin.username}`}</div>
 			<div>{`${SubscriberCount} Subscribers`}</div>

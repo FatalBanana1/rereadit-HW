@@ -136,7 +136,6 @@ const commentsReducer = (state = defaultState(), action) => {
 				return acc;
 			}, {});
 			return {
-				...state,
 				...newSubs,
 			};
 		}
@@ -162,8 +161,9 @@ const commentsReducer = (state = defaultState(), action) => {
 			return newState;
 		}
 
-		case RESET_COMMENTS:
+		case RESET_COMMENTS: {
 			return defaultState();
+		}
 
 		default:
 			return state;

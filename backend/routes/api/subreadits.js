@@ -5,10 +5,10 @@ const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
 const { checkIfSubreaditExists } = require("../../utils/not-found");
-const { User, Subreadit, Subscription } = require("../../db/models");
+const { User, Subreadit, Subscription, Post } = require("../../db/models");
 const {
 	validateCreateSubreadit,
-	validateEditSubreadit
+	validateEditSubreadit,
 } = require("../../utils/validation-chains");
 const { verifyIsMod, verifyIsAdmin } = require("../../utils/forbidden");
 const router = express.Router();
@@ -28,7 +28,7 @@ router.post(
 			about,
 			category,
 			circleImage,
-			bannerImage
+			bannerImage,
 		});
 		const subId = newSubreadit.id;
 		await Subscription.create({ subId, userId: adminId, status: "Mod" });
@@ -37,6 +37,15 @@ router.post(
 	}
 );
 
+// GET all posts by subId
+router.get("/:subId/posts", async (req, res, next) => {
+	let { subId } = req.params;
+	const allPosts = await Post.scope({ method: ["postsSubId"] }).findAll({
+		where: { subId },
+	});
+	return res.json(allPosts);
+});
+
 // GET Subreadit by id
 router.get("/:subId", checkIfSubreaditExists, (req, res, next) => {
 	return res.json(req.subreadit);
@@ -44,9 +53,9 @@ router.get("/:subId", checkIfSubreaditExists, (req, res, next) => {
 
 // GET: Get All Subreadits Route: /api/subreadits
 router.get("/", async (req, res, next) => {
-	console.log(`BACKEND - get all`)
+	// console.log(`BACKEND - get all`)
 	const allSubreadits = await Subreadit.scope({
-		method: ["allSubreadits"]
+		method: ["allSubreadits"],
 	}).findAll();
 
 	return res.json(allSubreadits);
@@ -75,7 +84,7 @@ router.put(
 			about,
 			category,
 			bannerImage,
-			circleImage
+			circleImage,
 		});
 	}
 );
@@ -89,11 +98,11 @@ router.delete(
 	async (req, res, next) => {
 		const subName = req.subreadit.name;
 		await Subreadit.destroy({
-			where: { id: req.subreadit.id }
+			where: { id: req.subreadit.id },
 		});
 
 		return res.json({
-			message: `Successfully deleted ${subName}`
+			message: `Successfully deleted ${subName}`,
 		});
 	}
 );

@@ -5,8 +5,12 @@ import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import { thunkReadSubreadits } from "../../../store/subreadits";
+import {
+	actionResetSubreadits,
+	thunkReadSubreadits,
+} from "../../../store/subreadits";
 import ReadSubreadit from "../ReadSubreadit";
+import { actionResetPosts } from "../../../store/posts";
 
 //main
 const SubreaditIndex = () => {
@@ -25,11 +29,16 @@ const SubreaditIndex = () => {
 	//return
 	return (
 		<div>
-			<div>Connected to Subreadit Index Component!!!</div>
+			<div className="details-font">Subreadit Index</div>
+			<div className="posts-div">Subreadits:</div>
 			{isLoaded && (
 				<div className="subs-container">
 					{subreadits.map((sub) => (
-						<NavLink key={sub.id} to={`/sub/${sub.id}`}>
+						<NavLink
+							className="sub-links"
+							key={sub.id}
+							to={`/sub/${sub.id}`}
+						>
 							<ReadSubreadit sub={sub} />
 						</NavLink>
 					))}

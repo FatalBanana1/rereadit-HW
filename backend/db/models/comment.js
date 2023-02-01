@@ -7,22 +7,22 @@ module.exports = (sequelize, DataTypes) => {
 			// Parent
 			Comment.hasMany(models.Comment, {
 				foreignKey: "parentId",
-				as: "parentComment"
+				as: "parentComment",
 			});
 			// Children
 			Comment.belongsTo(models.Comment, {
 				foreignKey: "parentId",
-				as: "childComments"
+				as: "childComments",
 			});
 			// Post -|---< Comment association
 			Comment.belongsTo(models.Post, {
 				foreignKey: "postId",
 				onDelete: "CASCADE",
-				as: "PostComments"
+				as: "PostComments",
 			});
 			// User -|---< Comment association
 			Comment.belongsTo(models.User, {
-				foreignKey: "userId"
+				foreignKey: "userId",
 			});
 		}
 	}
@@ -31,30 +31,56 @@ module.exports = (sequelize, DataTypes) => {
 			postId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Posts"
+					model: "Posts",
 				},
-				onDelete: "CASCADE"
+				onDelete: "CASCADE",
 			},
 			userId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Users"
-				}
+					model: "Users",
+				},
 			},
 			parentId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Comments"
+					model: "Comments",
 				},
-				allowNull: true
+				allowNull: true,
 			},
 			text: {
-				type: DataTypes.TEXT
-			}
+				type: DataTypes.TEXT,
+			},
 		},
 		{
 			sequelize,
-			modelName: "Comment"
+			modelName: "Comment",
+			scopes: {
+				allComments() {
+					const { Subreadit, User, Post } = require(".");
+					return {
+						attributes: {
+							exclude: ["updatedAt", "userId"],
+						},
+						include: [
+							{
+								model: User,
+								attributes: ["id", "username"],
+							},
+							{
+								model: Subreadit,
+								attributes: ["id", "name"],
+							},
+							{
+								model: Post,
+								as: "Post",
+							},
+						],
+						order: [["id", "DESC"]],
+						// group: ["Post.id"],
+					};
+				},
+			},
 		}
 	);
 	return Comment;

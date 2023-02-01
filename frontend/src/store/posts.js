@@ -60,11 +60,10 @@ export const actionResetPosts = () => ({
 export const thunkReadPosts = (payload) => async (dispatch) => {
 	let response = await csrfFetch(`/api/sub/${payload.subId}/posts`);
 
-	// console.log(`thunk>>> response: `, response);
-
 	if (response.ok) {
 		const posts = await response.json();
 		dispatch(actionReadPosts(posts));
+		// console.log(`thunk>>> response: `, posts);
 		return posts;
 	}
 };
@@ -150,7 +149,6 @@ const postsReducer = (state = defaultState(), action) => {
 				return acc;
 			}, {});
 			return {
-				...state,
 				...newSubs,
 			};
 		}
@@ -182,8 +180,10 @@ const postsReducer = (state = defaultState(), action) => {
 			return newState;
 		}
 
-		case RESET_POST:
+		case RESET_POST: {
+			console.log(`REDUCER RESET POSTS-------2:`);
 			return defaultState();
+		}
 
 		default:
 			return state;

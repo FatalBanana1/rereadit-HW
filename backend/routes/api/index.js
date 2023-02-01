@@ -7,6 +7,7 @@ const sessionRouter = require("./session.js");
 const usersRouter = require("./users.js");
 const subreaditsRouter = require("./subreadits.js");
 const postsRouter = require("./posts.js");
+const commentsRouter = require("./comments.js");
 
 // routes
 
@@ -52,6 +53,7 @@ router.use("/session", sessionRouter);
 router.use("/users", usersRouter);
 router.use("/sub", subreaditsRouter);
 router.use("/posts", postsRouter);
+router.use("/comments", commentsRouter);
 
 router.post("/test", (req, res) => {
 	res.json({ requestBody: req.body });

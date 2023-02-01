@@ -135,7 +135,7 @@ module.exports = (sequelize, DataTypes) => {
 					};
 				},
 				singleSubreadit() {
-					const { Subscription, User } = require(".");
+					const { Subscription, User, Post } = require(".");
 					return {
 						attributes: {
 							include: [

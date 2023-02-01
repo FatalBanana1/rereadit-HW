@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 import SubreaditIndex from "./components/Subreadit/SubreaditIndex";
 import SubreaditDetails from "./components/Subreadit/SubreaditDetails";
+import PostDetails from "./components/Posts/PostDetails";
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,6 +26,10 @@ function App() {
 
 					<Route exact path="/sub">
 						<SubreaditIndex />
+					</Route>
+
+					<Route path="/posts/:postId">
+						<PostDetails />
 					</Route>
 
 					<Route path="/sub/:subId">

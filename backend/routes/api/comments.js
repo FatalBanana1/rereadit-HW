@@ -5,7 +5,13 @@ const express = require("express");
 
 const { requireAuth } = require("../../utils/auth");
 const { checkIfSubreaditExists } = require("../../utils/not-found");
-const { User, Subreadit, Subscription, Post } = require("../../db/models");
+const {
+	User,
+	Subreadit,
+	Subscription,
+	Post,
+	Comment,
+} = require("../../db/models");
 const {
 	validateCreateSubreadit,
 	validateEditSubreadit,
@@ -13,19 +19,13 @@ const {
 const { verifyIsMod, verifyIsAdmin } = require("../../utils/forbidden");
 const router = express.Router();
 
-// GET post by postId
-router.get("/:postId", async (req, res, next) => {
-	let { postId } = req.params;
-	const allPosts = await Post.scope({ method: ["allPosts"] }).findOne({
-		where: { id: postId },
-	});
-	return res.json(allPosts);
-});
-
-// GET all posts
+// GET all comments
 router.get("/", async (req, res, next) => {
-	const allPosts = await Post.scope({ method: ["allPosts"] }).findAll();
-	return res.json(allPosts);
+	console.log(`COMMMENTS BACKEND -----`);
+	const allComments = await Comment.scope({
+		method: ["allComments"],
+	}).findAll();
+	return res.json(allComments);
 });
 
 module.exports = router;
