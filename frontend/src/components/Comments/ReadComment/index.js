@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 //main
 const ReadComment = ({ comment }) => {
-	console.log(`COMMENT ID ---`, comment);
+	// console.log(`COMMENT ID ---`, comment);
 	// let allComments = useSelector((state) => state.comments);
-	console.log(`COMMENT>>>`, comment.childComments);
+	// console.log(`COMMENT>>>`, comment.childComments);
 	// let curr = allComments[comment.id];
 
 	if (comment && comment.User) {
@@ -32,12 +32,12 @@ const ReadComment = ({ comment }) => {
 		let day = date[2];
 		let year = date[3];
 
-		// console.log(`COMMENT>>>`, comment);
+		// console.log(`COMMENT>>>`, childComments);
 
 		return (
 			<div className="read-comments">
-				<div className="about-post">{`${User.username}: ${text}`}</div>
-				<div>{`Posted ${month} ${day}, ${year}`}</div>
+				<div className="about-post">{`${User.username}: Posted ${month} ${day}, ${year}`}</div>
+				<div>{`${text}`}</div>
 
 				{/* {curr && curr.childComments.length > 0 ? (
 					<ReadComment
@@ -46,7 +46,13 @@ const ReadComment = ({ comment }) => {
 					/>
 				) : null} */}
 
-				{comment && childComments[0] ? (
+				{comment && childComments.length > 1 ? (
+					<div>
+						{childComments.map((comment) => (
+							<ReadComment key={comment.id} comment={comment} />
+						))}
+					</div>
+				) : comment && childComments.length === 1 ? (
 					<ReadComment key={comment.id} comment={childComments[0]} />
 				) : null}
 			</div>
@@ -64,7 +70,6 @@ const ReadComment = ({ comment }) => {
 export default ReadComment;
 
 /*
-
 {
 id,
 postId,
@@ -75,5 +80,4 @@ User { id, username},
 PostComments { id, subId, userId},
 childComments
 }
-
 */

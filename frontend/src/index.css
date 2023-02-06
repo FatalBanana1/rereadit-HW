@@ -43,6 +43,7 @@
 .readsub-container:hover,
 .read-comments:hover {
 	color: darkslategray;
+	border-left: 1px darkslategray solid;
 }
 
 .posts-div {
