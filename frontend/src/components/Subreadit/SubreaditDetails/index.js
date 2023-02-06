@@ -2,15 +2,15 @@
 
 //imports
 import React, { useEffect, useState } from "react";
-import * as sessionActions from "../../../store/session";
+// import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import {
 	thunkReadSubreaditDetails,
-	thunkReadSubreadits,
+	// thunkReadSubreadits,
 } from "../../../store/subreadits";
 import { thunkReadPosts } from "../../../store/posts";
-import ReadSubreadit from "../ReadSubreadit";
+// import ReadSubreadit from "../ReadSubreadit";
 import ReadPost from "../../Posts/ReadPost";
 import "../../../index.css";
 
@@ -26,7 +26,7 @@ const SubreaditDetails = () => {
 			.then(() => dispatch(thunkReadPosts(payload)))
 			.then(() => setIsLoaded(true))
 			.catch((e) => e.errors);
-	}, [dispatch]);
+	}, [dispatch, subId]);
 
 	let subs = useSelector((state) => state.subreadits);
 	let allPosts = useSelector((state) => state.posts);
@@ -38,14 +38,14 @@ const SubreaditDetails = () => {
 		let {
 			Admin,
 			SubscriberCount,
-			Subscribers,
+			// Subscribers,
 			Mods,
 			about,
-			adminId,
-			bannerImage,
-			category,
-			circleImage,
-			id,
+			// adminId,
+			// bannerImage,
+			// category,
+			// circleImage,
+			// id,
 			name,
 		} = sub;
 

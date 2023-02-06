@@ -2,7 +2,7 @@
 
 //imports
 import React, { useEffect, useState } from "react";
-import * as sessionActions from "../../../store/session";
+// import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkReadPostDetails } from "../../../store/posts";
@@ -21,7 +21,7 @@ const PostDetails = () => {
 			.then(() => dispatch(thunkReadComments(payload)))
 			.then(() => setIsLoaded(true))
 			.catch((e) => e.errors);
-	}, [dispatch]);
+	}, [dispatch, postId]);
 
 	let posts = useSelector((state) => state.posts);
 	let allComments = useSelector((state) => state.comments);
@@ -29,20 +29,20 @@ const PostDetails = () => {
 	let post = posts[postId];
 
 	if (isLoaded) {
-		function dfs(el) {
-			let mapper = [];
-			let stack = [el];
-			while (stack) {
-				let curr = stack.pop();
-				if (curr) {
-					mapper.push(curr);
-				}
-				if (!curr || !curr.childComments) return mapper;
-				if (curr.childComments[0])
-					stack.push(allComments[curr.childComments[0].id]);
-			}
-			return mapper;
-		}
+		// function dfs(el) {
+		// 	let mapper = [];
+		// 	let stack = [el];
+		// 	while (stack) {
+		// 		let curr = stack.pop();
+		// 		if (curr) {
+		// 			mapper.push(curr);
+		// 		}
+		// 		if (!curr || !curr.childComments) return mapper;
+		// 		if (curr.childComments[0])
+		// 			stack.push(allComments[curr.childComments[0].id]);
+		// 	}
+		// 	return mapper;
+		// }
 
 		// list of children,
 		// reverse array
@@ -74,13 +74,13 @@ const PostDetails = () => {
 
 		let {
 			createdAt,
-			id,
+			// id,
 			linkUrl,
-			picUrl,
-			subId,
+			// picUrl,
+			// subId,
 			text,
 			title,
-			userId,
+			// userId,
 			CommentCount,
 			Subreadit,
 			User,
@@ -103,7 +103,7 @@ const PostDetails = () => {
 					{linkUrl ? (
 						<a
 							href={linkUrl}
-							target="_blank"
+							// target="_blank"
 						>{`Link: ${linkUrl}`}</a>
 					) : null}
 					<div className="spacing">{`By: ${User.username}`}</div>
@@ -114,15 +114,9 @@ const PostDetails = () => {
 
 				<div className="post-container">
 					{comments.map((comment) => {
-						if (comment.parentId) {
-						} else {
-							return (
-								<ReadComment
-									key={comment.id}
-									comment={comment}
-								/>
-							);
-						}
+						return (
+							<ReadComment key={comment.id} comment={comment} />
+						);
 					})}
 				</div>
 			</div>

@@ -1,9 +1,9 @@
 // subreadit index
 
 //imports
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 // import * as sessionActions from "../../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 // import { NavLink, useHistory } from "react-router-dom";
 // import { actionResetPosts, thunkReadPosts } from "../../../store/posts";
 
@@ -16,13 +16,13 @@ const ReadComment = ({ comment }) => {
 
 	if (comment && comment.User) {
 		let {
-			id,
-			postId,
-			parentId,
+			// id,
+			// postId,
+			// parentId,
 			text,
 			createdAt,
 			User,
-			PostComments,
+			// PostComments,
 			childComments,
 		} = comment;
 

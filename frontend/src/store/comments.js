@@ -22,11 +22,11 @@ const actionReadComments = (comments) => ({
 	comments,
 });
 
-//read subreadit details
-const actionReadCommentDetails = (comment) => ({
-	type: READ_COMMENT_DETAILS,
-	comment,
-});
+// //read subreadit details
+// const actionReadCommentDetails = (comment) => ({
+// 	type: READ_COMMENT_DETAILS,
+// 	comment,
+// });
 
 //create
 const actionCreateComment = (comment) => ({

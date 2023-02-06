@@ -1,11 +1,11 @@
 // subreadit index
 
 //imports
-import React, { useEffect, useState } from "react";
-import * as sessionActions from "../../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
-import { actionResetPosts, thunkReadPosts } from "../../../store/posts";
+// import React, { useEffect, useState } from "react";
+// import * as sessionActions from "../../../store/session";
+// import { useDispatch, useSelector } from "react-redux";
+// import { NavLink, useHistory } from "react-router-dom";
+// import { actionResetPosts, thunkReadPosts } from "../../../store/posts";
 
 //main
 const ReadPost = ({ post }) => {
@@ -13,9 +13,9 @@ const ReadPost = ({ post }) => {
 		CommentCount,
 		Subreadit,
 		User,
-		id,
+		// id,
 		linkUrl,
-		picUrl,
+		// picUrl,
 		text,
 		title,
 		createdAt,

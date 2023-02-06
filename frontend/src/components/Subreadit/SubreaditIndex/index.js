@@ -2,15 +2,15 @@
 
 //imports
 import React, { useEffect, useState } from "react";
-import * as sessionActions from "../../../store/session";
+// import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import {
-	actionResetSubreadits,
+	// actionResetSubreadits,
 	thunkReadSubreadits,
 } from "../../../store/subreadits";
 import ReadSubreadit from "../ReadSubreadit";
-import { actionResetPosts } from "../../../store/posts";
+// import { actionResetPosts } from "../../../store/posts";
 
 //main
 const SubreaditIndex = () => {

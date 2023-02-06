@@ -1,10 +1,10 @@
 // subreadit index
 
 //imports
-import React, { useEffect, useState } from "react";
-import * as sessionActions from "../../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+// import React, { useEffect, useState } from "react";
+// import * as sessionActions from "../../../store/session";
+// import { useDispatch, useSelector } from "react-redux";
+// import { NavLink, useHistory } from "react-router-dom";
 
 //main
 const ReadSubreadit = ({ sub }) => {
@@ -12,11 +12,11 @@ const ReadSubreadit = ({ sub }) => {
 		Admin,
 		SubscriberCount,
 		about,
-		adminId,
-		bannerImage,
-		category,
-		circleImage,
-		id,
+		// adminId,
+		// bannerImage,
+		// category,
+		// circleImage,
+		// id,
 		name,
 	} = sub;
 
