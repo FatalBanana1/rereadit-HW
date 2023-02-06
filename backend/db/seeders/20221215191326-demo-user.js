@@ -104,7 +104,7 @@ module.exports = {
 			options,
 			{
 				id: {
-					[Op.gte]: 0,
+					[Op.gte]: 1,
 				},
 			},
 			{}
