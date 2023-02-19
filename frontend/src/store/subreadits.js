@@ -181,7 +181,7 @@ const subreaditsReducer = (state = defaultState(), action) => {
 		}
 
 		case RESET_SUBREADIT: {
-			console.log(`REDUCER RESET SUBR-------1:`);
+			// console.log(`REDUCER RESET SUBR-------1:`);
 			return defaultState();
 		}
 

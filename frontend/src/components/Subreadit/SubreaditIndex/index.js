@@ -4,8 +4,9 @@
 import React, { useEffect, useState } from "react";
 // import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
+	actionResetSubreadits,
 	// actionResetSubreadits,
 	thunkReadSubreadits,
 } from "../../../store/subreadits";
@@ -16,12 +17,14 @@ import ReadSubreadit from "../ReadSubreadit";
 const SubreaditIndex = () => {
 	let dispatch = useDispatch();
 	let [isLoaded, setIsLoaded] = useState(false);
+	let [ssubs, setSsubs] = useState(false);
 
 	useEffect(() => {
 		dispatch(thunkReadSubreadits())
 			.then(() => setIsLoaded(true))
 			.catch((e) => e.errors);
-	}, [dispatch]);
+		return () => dispatch(actionResetSubreadits());
+	}, [dispatch, ssubs]);
 
 	let subs = useSelector((state) => state.subreadits);
 	let subreadits = Object.values(subs);
