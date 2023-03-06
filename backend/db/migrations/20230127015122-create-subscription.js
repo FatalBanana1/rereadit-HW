@@ -34,7 +34,7 @@ module.exports = {
 				},
 				status: {
 					type: Sequelize.ENUM,
-					values: ["Mod", "Member", "Banned"],
+					values: ["Owner","Mod", "Member", "Banned"],
 					defaultValue: "Member",
 					allowNull: false,
 				},

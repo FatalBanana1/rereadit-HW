@@ -19,7 +19,7 @@ module.exports = {
 				{
 					subId: 1,
 					userId: 1,
-					status: "Mod",
+					status: "Owner",
 				},
 				{
 					subId: 1,
@@ -49,7 +49,7 @@ module.exports = {
 				{
 					subId: 2,
 					userId: 1,
-					status: "Mod",
+					status: "Owner",
 				},
 				{
 					subId: 2,
@@ -64,7 +64,7 @@ module.exports = {
 				{
 					subId: 3,
 					userId: 1,
-					status: "Mod",
+					status: "Owner",
 				},
 				{
 					subId: 3,
