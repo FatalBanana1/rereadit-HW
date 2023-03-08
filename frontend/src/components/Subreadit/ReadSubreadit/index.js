@@ -20,15 +20,19 @@ const ReadSubreadit = ({ sub }) => {
 		name,
 	} = sub;
 
-	//return
-	return (
-		<div className="readsub-container">
-			<h3>{`${name}`}</h3>
-			<div>{`About: ${about}`}</div>
-			<div>{`Created by: ${Admin.username}`}</div>
-			<div>{`${SubscriberCount} Subscribers`}</div>
-		</div>
-	);
+	// console.log(`front end ------subreadit deeets =====create......`, Admin);
+
+	if (sub && Admin) {
+		//return
+		return (
+			<div className="readsub-container">
+				<h3>{`${name}`}</h3>
+				<div>{`About: ${about}`}</div>
+				<div>{`Created by: ${Admin.username}`}</div>
+				<div>{`${SubscriberCount} Subscribers`}</div>
+			</div>
+		);
+	} else return null;
 };
 
 export default ReadSubreadit;
@@ -46,6 +50,5 @@ circleImage,
 id,
 name,
 }
-
 
 */

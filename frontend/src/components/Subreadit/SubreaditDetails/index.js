@@ -4,9 +4,11 @@
 import React, { useEffect, useState } from "react";
 // import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import {
+	thunkDeleteSubreadit,
 	thunkReadSubreaditDetails,
+	thunkUpdateSubreadit,
 	// thunkReadSubreadits,
 } from "../../../store/subreadits";
 import { thunkReadPosts } from "../../../store/posts";
@@ -17,6 +19,7 @@ import "../../../index.css";
 //main
 const SubreaditDetails = () => {
 	let dispatch = useDispatch();
+	const history = useHistory();
 	let [isLoaded, setIsLoaded] = useState(false);
 	let { subId } = useParams();
 
@@ -28,13 +31,17 @@ const SubreaditDetails = () => {
 			.catch((e) => e.errors);
 	}, [dispatch, subId]);
 
+	let user = useSelector((state) => state.session.user);
 	let subs = useSelector((state) => state.subreadits);
 	let allPosts = useSelector((state) => state.posts);
 	let posts = Object.values(allPosts);
 
 	let sub = subs[subId];
 
-	if (isLoaded) {
+	//-----------------------------------------------
+
+	//loaded
+	if (isLoaded && sub) {
 		let {
 			Admin,
 			SubscriberCount,
@@ -51,11 +58,54 @@ const SubreaditDetails = () => {
 
 		let mods = Object.values(Mods);
 
+		//--------------------------------------------
+
+		//handlers
+
+		//delete
+		const handleDeleteSubreadit = () => {
+			let payload = {
+				id: subId,
+				access: user,
+			};
+			//dispatch
+			dispatch(thunkDeleteSubreadit(payload))
+				.then(() => history.push(`/sub`))
+				.catch((e) => e.errors);
+		};
+
+		//edit
+		const handleEditSubreadit = () => {
+			let payload = {
+				...sub,
+				adminId: 1,
+				name: "Flask",
+				about: "The most awesome ORM for Python language. Posting tips and suggestions for working with this ORM.",
+				category: "Technology",
+				// bannerImage,
+				// circleImage,
+			};
+			//dispatch
+			dispatch(thunkUpdateSubreadit(payload)).catch((e) => e.errors);
+		};
+
+		//--------------------------------------------
+
 		//return
 		return (
-			<>
+			<div>
 				<div className="details-font">Subreadit Details</div>
-				<div className="posts-div">Posts:</div>
+
+				<div className="row spacebetween aligncenter">
+					<div className="posts-div">Posts:</div>
+
+					<div className="rem12">Join Subreadit</div>
+
+					<div className="rem12 pointer" onClick={handleDeleteSubreadit}>
+						Delete Subreadit
+					</div>
+				</div>
+
 				<div className="super-container">
 					<div className="sub-margin-container">
 						<div className="left-sub-container">
@@ -87,7 +137,7 @@ const SubreaditDetails = () => {
 						</div>
 					</div>
 				</div>
-			</>
+			</div>
 		);
 	} else return null;
 };

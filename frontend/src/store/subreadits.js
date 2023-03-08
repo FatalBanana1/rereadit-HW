@@ -58,9 +58,6 @@ export const actionResetSubreadits = () => ({
 // GET: Get All Subreadits Route: /api/sub
 export const thunkReadSubreadits = () => async (dispatch) => {
 	let response = await csrfFetch(`/api/sub`);
-
-	// console.log(`thunk>>> response: `, response);
-
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionReadSubreadits(subs));
@@ -71,8 +68,6 @@ export const thunkReadSubreadits = () => async (dispatch) => {
 // GET: Get Subreadit Details Route: /api/sub/:subId
 export const thunkReadSubreaditDetails = (payload) => async (dispatch) => {
 	const response = await csrfFetch(`/api/sub/${payload.subId}`);
-
-	// console.log(`thunk>>> response: `, response);
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionReadSubreaditDetails(subs));
@@ -82,7 +77,7 @@ export const thunkReadSubreaditDetails = (payload) => async (dispatch) => {
 
 // POST: Create a Group Route: /api/sub
 export const thunkCreateSubreadit = (payload) => async (dispatch) => {
-	const response = await csrfFetch(`/api/sub`, {
+	const response = await csrfFetch(`/api/sub/`, {
 		method: `POST`,
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
@@ -97,7 +92,7 @@ export const thunkCreateSubreadit = (payload) => async (dispatch) => {
 
 // PUT: Edit a Subreadit Route: /api/sub/:subId
 export const thunkUpdateSubreadit = (payload) => async (dispatch) => {
-	const response = await csrfFetch(`/api/sub/${payload.id}`, {
+	const response = await csrfFetch(`/api/sub/`, {
 		method: `PUT`,
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
@@ -112,13 +107,11 @@ export const thunkUpdateSubreadit = (payload) => async (dispatch) => {
 
 // DELETE: Delete Subreadit Route: /api/sub/:subId
 export const thunkDeleteSubreadit = (payload) => async (dispatch) => {
-	const response = await csrfFetch(`/api/sub/${payload.subId}`, {
+	const response = await csrfFetch(`/api/sub/${payload.id}`, {
 		method: `DELETE`,
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
 	});
-
-	// console.log(`group id in THUNK>>>>>>>`,response);
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionDeleteSubreadit(subs));
@@ -138,16 +131,11 @@ function defaultState() {
 const subreaditsReducer = (state = defaultState(), action) => {
 	switch (action.type) {
 		case READ_SUBREADITS: {
-			// console.log(`reducer>>> ACTION: `, action);
-
 			const newSubs = action.subreadits.reduce((acc, sub) => {
 				acc[sub.id] = sub;
 				return acc;
 			}, {});
-			return {
-				...state,
-				...newSubs,
-			};
+			return { ...state, ...newSubs };
 		}
 
 		case READ_SUBREADIT_DETAILS: {
@@ -160,6 +148,7 @@ const subreaditsReducer = (state = defaultState(), action) => {
 		}
 
 		case CREATE_SUBREADIT: {
+			// console.log(`reducer>>> ACTION: 111-1--------`, action);
 			const newState = {
 				...state,
 				[action.subreadit.id]: action.subreadit,
@@ -168,6 +157,7 @@ const subreaditsReducer = (state = defaultState(), action) => {
 		}
 
 		case UPDATE_SUBREADIT: {
+			console.log(`reducer>>> ACTION: 222>>>>>>>>>>`, action.subreadit);
 			return {
 				...state,
 				...(state[action.subreadit.id] = action.subreadit),
@@ -175,6 +165,7 @@ const subreaditsReducer = (state = defaultState(), action) => {
 		}
 
 		case DELETE_SUBREADIT: {
+			// console.log(`reducer>>> ACTION: 222>>>>>>>>>>`, action);
 			const newState = { ...state };
 			delete newState[action.subreadit.id];
 			return newState;

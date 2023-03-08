@@ -26,7 +26,8 @@ const ReadPost = ({ post }) => {
 	let day = date[2];
 	let year = date[3];
 
-	//return
+
+	//loaded
 	if (post) {
 		return (
 			<div className="readpost-container">

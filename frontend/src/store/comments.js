@@ -7,7 +7,6 @@ import { csrfFetch } from "./csrf";
 
 //types crud - subreadits
 const READ_COMMENTS = `comments/READ`;
-const READ_COMMENT_DETAILS = `comment/READ_DETAILS`;
 const CREATE_COMMENT = `comments/CREATE`;
 const UPDATE_COMMENT = `comments/UPDATE`;
 const DELETE_COMMENT = `comments/DELETE`;
@@ -21,12 +20,6 @@ const actionReadComments = (comments) => ({
 	type: READ_COMMENTS,
 	comments,
 });
-
-// //read subreadit details
-// const actionReadCommentDetails = (comment) => ({
-// 	type: READ_COMMENT_DETAILS,
-// 	comment,
-// });
 
 //create
 const actionCreateComment = (comment) => ({
@@ -59,9 +52,6 @@ export const actionResetComments = () => ({
 // Route: /api/posts/:postId/comments
 export const thunkReadComments = (payload) => async (dispatch) => {
 	let response = await csrfFetch(`/api/posts/${payload.postId}/comments`);
-
-	console.log(`thunk>>> response: `, response);
-
 	if (response.ok) {
 		const comments = await response.json();
 		dispatch(actionReadComments(comments));
@@ -77,7 +67,6 @@ export const thunkCreateComment = (payload) => async (dispatch) => {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
 	});
-
 	if (response.ok) {
 		const comments = await response.json();
 		dispatch(actionCreateComment(comments));
@@ -93,7 +82,6 @@ export const thunkUpdateComment = (payload) => async (dispatch) => {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
 	});
-
 	if (response.ok) {
 		const comments = await response.json();
 		dispatch(actionUpdateComment(comments));
@@ -109,8 +97,6 @@ export const thunkDeleteComment = (payload) => async (dispatch) => {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
 	});
-
-	// console.log(`group id in THUNK>>>>>>>`,response);
 	if (response.ok) {
 		const comments = await response.json();
 		dispatch(actionDeleteComment(comments));

@@ -4,14 +4,16 @@
 import React, { useEffect, useState } from "react";
 // import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { thunkReadPostDetails } from "../../../store/posts";
 import { thunkReadComments } from "../../../store/comments";
 import ReadComment from "../../Comments/ReadComment";
+import "../Posts.css";
 
 //main
 const PostDetails = () => {
 	let dispatch = useDispatch();
+	const history = useHistory();
 	let [isLoaded, setIsLoaded] = useState(false);
 	let { postId } = useParams();
 
@@ -95,7 +97,15 @@ const PostDetails = () => {
 		//return
 		return (
 			<div>
-				<div className="details-font">Post Details</div>
+				<div className="row spacebetween">
+					<div
+						className="details-font pointer"
+						onClick={() => history.push(`/sub/${Subreadit.id}`)}
+					>
+						Back to Subreadit
+					</div>
+					<div className="details-font">Post Details</div>
+				</div>
 
 				<div className="post-container">
 					<h4>{title}</h4>
@@ -113,11 +123,13 @@ const PostDetails = () => {
 				</div>
 
 				<div className="post-container">
-					{comments.map((comment) => {
-						return (
-							<ReadComment key={comment.id} comment={comment} />
-						);
-					})}
+					{comments.map((comment) => (
+						<div key={comment.id}>
+							{!comment.parentId && (
+								<ReadComment comment={comment} />
+							)}
+						</div>
+					))}
 				</div>
 			</div>
 		);

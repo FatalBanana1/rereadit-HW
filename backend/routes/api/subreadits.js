@@ -31,9 +31,12 @@ router.post(
 			bannerImage,
 		});
 		const subId = newSubreadit.id;
-		await Subscription.create({ subId, userId: adminId, status: "Mod" });
+		await Subscription.create({ subId, userId: adminId, status: "Owner" });
+		const subreadit = await Subreadit.scope({
+			method: ["singleSubreadit"],
+		}).findByPk(newSubreadit.id);
 
-		return res.json(newSubreadit);
+		return res.json(subreadit);
 	}
 );
 
@@ -97,12 +100,13 @@ router.delete(
 	verifyIsAdmin,
 	async (req, res, next) => {
 		const subName = req.subreadit.name;
+		const temp = req.subreadit.id;
 		await Subreadit.destroy({
-			where: { id: req.subreadit.id },
+			where: { id: temp },
 		});
-
 		return res.json({
 			message: `Successfully deleted ${subName}`,
+			id: temp,
 		});
 	}
 );

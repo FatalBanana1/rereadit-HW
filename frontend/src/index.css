@@ -97,3 +97,132 @@ a {
 	margin-left: 30vw;
 	margin-bottom: 10px;
 }
+
+/* ------------basic styles---------------------- */
+
+.rem05 {
+	font-size: 0.5rem;
+}
+.rem06 {
+	font-size: 0.6rem;
+}
+.rem08 {
+	font-size: 0.8rem;
+}
+.rem09 {
+	font-size: 0.9rem;
+}
+.rem12 {
+	font-size: 1.2rem;
+}
+.rem15 {
+	font-size: 1.5rem;
+}
+
+.mtop5 {
+	margin-top: 5px;
+}
+.mtop15 {
+	margin-top: 15px;
+}
+.mtop10 {
+	margin-top: 10px;
+}
+.ptop5 {
+	padding-top: 5px;
+}
+.ptop10 {
+	padding-top: 10px;
+}
+.rowreverse {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.mbottom {
+	margin-bottom: 50px;
+}
+.mbottom5 {
+	margin-bottom: 5px;
+}
+.mbottom15 {
+	margin-bottom: 15px;
+}
+
+.mleft5 {
+	margin-left: 5px;
+}
+.mleft15 {
+	margin-left: 15px;
+}
+.pleft5 {
+	padding-left: 5px;
+}
+.pleft10 {
+	padding-left: 10px;
+}
+.mright5 {
+	margin-right: 5px;
+}
+
+.textcenter {
+	text-align: center;
+}
+.underline {
+	text-decoration: 1px underline;
+	text-underline-offset: 1px;
+}
+
+.winherit {
+	width: inherit;
+}
+
+.paddinglr5 {
+	padding: 0 5px;
+}
+
+.pbottom5 {
+	padding-bottom: 5px;
+}
+.pbottom10 {
+	padding-bottom: 10px;
+}
+
+/* ----------------------- */
+
+.default {
+	cursor: default;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.nopointer {
+	cursor: not-allowed;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+}
+
+.justifycenter {
+	justify-content: center;
+}
+
+.aligncenter {
+	align-items: center;
+}
+
+.spacebetween {
+	justify-content: space-between;
+}
+.spacearound {
+	justify-content: space-around;
+}
