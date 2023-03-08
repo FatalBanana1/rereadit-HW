@@ -58,9 +58,6 @@ export const actionResetSubreadits = () => ({
 // GET: Get All Subreadits Route: /api/sub
 export const thunkReadSubreadits = () => async (dispatch) => {
 	let response = await csrfFetch(`/api/sub`);
-
-	// console.log(`thunk>>> response: `, response);
-
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionReadSubreadits(subs));
@@ -71,8 +68,6 @@ export const thunkReadSubreadits = () => async (dispatch) => {
 // GET: Get Subreadit Details Route: /api/sub/:subId
 export const thunkReadSubreaditDetails = (payload) => async (dispatch) => {
 	const response = await csrfFetch(`/api/sub/${payload.subId}`);
-
-	// console.log(`thunk>>> response: `, response);
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionReadSubreaditDetails(subs));
@@ -87,7 +82,6 @@ export const thunkCreateSubreadit = (payload) => async (dispatch) => {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(payload),
 	});
-
 	if (response.ok) {
 		const subs = await response.json();
 		dispatch(actionCreateSubreadit(subs));

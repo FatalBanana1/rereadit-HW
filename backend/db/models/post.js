@@ -93,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
 							},
 						],
 						order: [["id", "DESC"]],
-						group: ["Post.id"],
+						group: ["Post.id", "User.id"],
 					};
 				},
 				postsSubId() {
@@ -127,7 +127,7 @@ module.exports = (sequelize, DataTypes) => {
 							},
 						],
 						order: [["id", "DESC"]],
-						group: ["Post.id"],
+						group: ["Post.id", "User.id"],
 					};
 				},
 				singlePost() {
