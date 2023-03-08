@@ -58,7 +58,7 @@ export const actionResetPosts = () => ({
 // GET: Get All Posts by Subreadit
 // Route: /api/sub/:subid/posts
 export const thunkReadPosts = (payload) => async (dispatch) => {
-	let response = await csrfFetch(`/api/sub/${payload.subId}/posts`);
+	let response = await csrfFetch(`/api/posts/`);
 
 	if (response.ok) {
 		const posts = await response.json();

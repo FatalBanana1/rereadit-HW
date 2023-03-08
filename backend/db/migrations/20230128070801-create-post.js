@@ -14,55 +14,56 @@ module.exports = {
 					allowNull: false,
 					autoIncrement: true,
 					primaryKey: true,
-					type: Sequelize.INTEGER
+					type: Sequelize.INTEGER,
 				},
 				title: {
 					type: Sequelize.STRING(100),
-					allowNull: false
+					allowNull: false,
 				},
 				userId: {
 					type: Sequelize.INTEGER,
 					references: {
-						model: "Users"
+						model: "Users",
 					},
 					onDelete: "CASCADE",
-					allowNull: false
+					allowNull: false,
 				},
 				subId: {
 					type: Sequelize.INTEGER,
 					references: {
-						model: "Subreadits"
+						model: "Subreadits",
 					},
 					onDelete: "CASCADE",
-					allowNull: false
+					allowNull: false,
 				},
 				text: {
 					type: Sequelize.TEXT,
-					allowNull: false
+					allowNull: false,
 				},
 				picUrl: {
 					type: Sequelize.TEXT,
-					allowNull: true
+					allowNull: true,
 				},
 				linkUrl: {
 					type: Sequelize.TEXT,
-					allowNull: true
+					allowNull: true,
 				},
 				createdAt: {
 					allowNull: false,
 					type: Sequelize.DATE,
-					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 				},
 				updatedAt: {
 					allowNull: false,
 					type: Sequelize.DATE,
-					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
-				}
+					defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+				},
 			},
 			options
 		);
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("Posts");
-	}
+		options.tableName = "Posts";
+		return queryInterface.dropTable(options);
+	},
 };

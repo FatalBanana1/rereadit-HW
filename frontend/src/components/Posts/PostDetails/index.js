@@ -113,11 +113,13 @@ const PostDetails = () => {
 				</div>
 
 				<div className="post-container">
-					{comments.map((comment) => {
-						return (
-							<ReadComment key={comment.id} comment={comment} />
-						);
-					})}
+					{comments.map((comment) => (
+						<div key={comment.id}>
+							{!comment.parentId && (
+								<ReadComment comment={comment} />
+							)}
+						</div>
+					))}
 				</div>
 			</div>
 		);
