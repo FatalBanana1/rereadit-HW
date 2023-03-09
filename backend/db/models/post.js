@@ -6,18 +6,18 @@ module.exports = (sequelize, DataTypes) => {
 			// User -|--< Posts association
 			Post.belongsTo(models.User, {
 				foreignKey: "userId",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
 			// Post -|---< Comments association
 			Post.hasMany(models.Comment, {
 				foreignKey: "postId",
 				onDelete: "CASCADE",
-				as: "PostComments",
+				as: "PostComments"
 			});
 			// Subreadit -|--< Post association
 			Post.belongsTo(models.Subreadit, {
 				foreignKey: "subId",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
 		}
 	}
@@ -26,37 +26,37 @@ module.exports = (sequelize, DataTypes) => {
 			userId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Users",
+					model: "Users"
 				},
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			},
 			subId: {
 				type: DataTypes.INTEGER,
 				references: {
-					model: "Subreadits",
+					model: "Subreadits"
 				},
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			},
 			title: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					max: 100,
-					min: 5,
-				},
+					min: 5
+				}
 			},
 			text: {
 				type: DataTypes.TEXT,
-				allowNull: false,
+				allowNull: false
 			},
 			picUrl: {
 				type: DataTypes.TEXT,
-				allowNull: true,
+				allowNull: true
 			},
 			linkUrl: {
 				type: DataTypes.TEXT,
-				allowNull: true,
-			},
+				allowNull: true
+			}
 		},
 		{
 			sequelize,
@@ -68,32 +68,29 @@ module.exports = (sequelize, DataTypes) => {
 						attributes: {
 							include: [
 								[
-									sequelize.fn(
-										"COUNT",
-										sequelize.col("PostComments.id")
-									),
-									"CommentCount",
-								],
+									sequelize.fn("COUNT", sequelize.col("PostComments.id")),
+									"CommentCount"
+								]
 							],
-							exclude: ["updatedAt", "userId", "subId"],
+							exclude: ["updatedAt", "userId", "subId"]
 						},
 						include: [
 							{
 								model: User,
-								attributes: ["id", "username"],
+								attributes: ["id", "username"]
 							},
 							{
 								model: Subreadit,
-								attributes: ["id", "name"],
+								attributes: ["id", "name"]
 							},
 							{
 								model: Comment,
 								attributes: [],
-								as: "PostComments",
-							},
+								as: "PostComments"
+							}
 						],
 						order: [["id", "DESC"]],
-						group: ["Post.id", "User.id"],
+						group: ["Post.id"]
 					};
 				},
 				postsSubId() {
@@ -102,38 +99,35 @@ module.exports = (sequelize, DataTypes) => {
 						attributes: {
 							include: [
 								[
-									sequelize.fn(
-										"COUNT",
-										sequelize.col("PostComments.id")
-									),
-									"CommentCount",
-								],
+									sequelize.fn("COUNT", sequelize.col("PostComments.id")),
+									"CommentCount"
+								]
 							],
-							exclude: ["updatedAt", "userId", "subId"],
+							exclude: ["updatedAt", "userId", "subId"]
 						},
 						include: [
 							{
 								model: User,
-								attributes: ["id", "username"],
+								attributes: ["id", "username"]
 							},
 							{
 								model: Subreadit,
-								attributes: ["id", "name"],
+								attributes: ["id", "name"]
 							},
 							{
 								model: Comment,
 								attributes: [],
-								as: "PostComments",
-							},
+								as: "PostComments"
+							}
 						],
 						order: [["id", "DESC"]],
-						group: ["Post.id", "User.id"],
+						group: ["Post.id", "User.id"]
 					};
 				},
 				singlePost() {
 					return {};
-				},
-			},
+				}
+			}
 		}
 	);
 	return Post;

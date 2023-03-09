@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
 			Subreadit.hasMany(models.Post, {
 				foreignKey: "subId",
-				onDelete: "CASCADE",
+				onDelete: "CASCADE"
 			});
 		}
 	}
@@ -108,6 +108,7 @@ module.exports = (sequelize, DataTypes) => {
 			scopes: {
 				allSubreadits() {
 					const { Subscription, User } = require(".");
+
 					return {
 						attributes: {
 							include: [
