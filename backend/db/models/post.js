@@ -90,7 +90,7 @@ module.exports = (sequelize, DataTypes) => {
 							}
 						],
 						order: [["id", "DESC"]],
-						group: ["Post.id"]
+						group: ["Post.id", "User.id", "Subreadit.id"]
 					};
 				},
 				postsSubId() {
@@ -125,7 +125,35 @@ module.exports = (sequelize, DataTypes) => {
 					};
 				},
 				singlePost() {
-					return {};
+					const { Subreadit, User, Comment } = require(".");
+					return {
+						attributes: {
+							include: [
+								[
+									sequelize.fn("COUNT", sequelize.col("PostComments.id")),
+									"CommentCount"
+								]
+							],
+							exclude: ["updatedAt", "userId", "subId"]
+						},
+						include: [
+							{
+								model: User,
+								attributes: ["id", "username"]
+							},
+							{
+								model: Subreadit,
+								attributes: ["id", "name"]
+							},
+							{
+								model: Comment,
+								attributes: [],
+								as: "PostComments"
+							}
+						],
+						order: [["id", "DESC"]],
+						group: ["Post.id", "User.id", "Subreadit.id"]
+					};
 				}
 			}
 		}
