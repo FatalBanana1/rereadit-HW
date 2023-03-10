@@ -56,11 +56,9 @@ router.get("/:subId", checkIfSubreaditExists, (req, res, next) => {
 
 // GET: Get All Subreadits Route: /api/subreadits
 router.get("/", async (req, res, next) => {
-	// console.log(`BACKEND - get all`)
 	const allSubreadits = await Subreadit.scope({
 		method: ["allSubreadits"],
 	}).findAll();
-
 	return res.json(allSubreadits);
 });
 

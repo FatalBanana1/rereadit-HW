@@ -10,11 +10,11 @@ const {
 	Subreadit,
 	Subscription,
 	Post,
-	Comment,
+	Comment
 } = require("../../db/models");
 const {
 	validateCreateSubreadit,
-	validateEditSubreadit,
+	validateEditSubreadit
 } = require("../../utils/validation-chains");
 const { verifyIsMod, verifyIsAdmin } = require("../../utils/forbidden");
 const router = express.Router();
@@ -23,7 +23,7 @@ const router = express.Router();
 router.get("/:postId/comments", async (req, res, next) => {
 	let { postId } = req.params;
 	const allComments = await Comment.scope({
-		method: ["allComments"],
+		method: ["allComments"]
 	}).findAll({ where: { postId } });
 	return res.json(allComments);
 });
@@ -31,10 +31,10 @@ router.get("/:postId/comments", async (req, res, next) => {
 // GET post by postId
 router.get("/:postId", async (req, res, next) => {
 	let { postId } = req.params;
-	const allPosts = await Post.scope({ method: ["allPosts"] }).findOne({
-		where: { id: postId },
-	});
-	return res.json(allPosts);
+	const singlePost = await Post.scope({
+		method: ["singlePost"]
+	}).findByPk(postId);
+	return res.json(singlePost);
 });
 
 // GET all posts
